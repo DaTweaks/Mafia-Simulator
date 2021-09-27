@@ -1,0 +1,4 @@
+NAME (can't be empty)
+TYPE (0 is Weapon, 1 is Armour)
+LEVEL (> 0, the level of the item)
+(all parenteses must be removed)

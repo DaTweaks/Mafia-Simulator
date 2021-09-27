@@ -1,0 +1,7 @@
+NAME (can't be empty)
+MONEYGAINED (> 0, the amount of money gained by a completed heist)
+SECURITY (> 0, how secure the bank is)
+GULLIBILITY (> 0, how easily tricked the bank is)
+POPULARITY (> 0, the amount of popularity needed to unlock)
+POPULARITYGAINED (> 0, the amount of popularity gained from heisting)
+(all parenteses must be removed)

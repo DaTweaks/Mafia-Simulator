@@ -1,0 +1,6 @@
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\bin\Debug\MafiaSimulator.exe
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\bin\Debug\MafiaSimulator.pdb
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\obj\Debug\MafiaSimulator.csprojAssemblyReference.cache
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\obj\Debug\MafiaSimulator.csproj.CoreCompileInputs.cache
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\obj\Debug\MafiaSimulator.exe
+C:\Users\david.hornemark\RiderProjects\MafiaSimulator\MafiaSimulator\obj\Debug\MafiaSimulator.pdb
