@@ -7,6 +7,9 @@ namespace MafiaSimulator
 {
     internal class Program
     {
+        public static List<Bank> loadedBanks = new List<Bank>();
+        public static List<item> loadedItems = new List<item>();
+        public static List<Crew> loadedCrews = new List<Crew>();
         public static void Main(string[] args)
         {
             FetchGameData();
@@ -14,31 +17,63 @@ namespace MafiaSimulator
         
         public static void FetchGameData()
         {
-            var banks = GetFileVariables("Banks");
-            var items = GetFileVariables("Items");
-            var crew = GetFileVariables("Crew");
-            for (int i = 0; i < banks.Count; i++)
+            var tempBanks = GetFileVariables("Banks");
+            var tempItems = GetFileVariables("Items");
+            var tempCrew = GetFileVariables("Crew");
+            for (int i = 0; i < loadedBanks.Count; i++)
             {
-                // NAME (can't be empty)
-                // MONEYGAINED (> 0, the amount of money gained by a completed heist)
-                // SECURITY (> 0, how secure the bank is)
-                // GULLIBILITY (> 0, how easily tricked the bank is)
-                // POPULARITY (> 0, the amount of popularity needed to unlock)
-                // POPULARITYGAINED (> 0, the amount of popularity gained from heisting) 
+                loadedBanks.Add(
+                    new Bank(
+                        tempBanks[i][0], 
+                        // NAME
+                        Convert.ToInt32(tempBanks[i][1]), 
+                        // MONEYGAINED
+                        Convert.ToInt32(tempBanks[i][2]), 
+                        // SECURITY
+                        Convert.ToInt32(tempBanks[i][3]), 
+                        // GULLIBILITY 
+                        Convert.ToInt32(tempBanks[i][4]), 
+                        // POPULARITY 
+                        Convert.ToInt32(tempBanks[i][5])
+                        // POPULARITYGAINED 
+                        )
+                    );
             }
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < tempItems.Count; i++)
             {
-                for (int j = 0; j < items[i].Count; j++)
-                {
-                    Console.WriteLine(items[i][j]);
-                }
+                loadedItems.Add(
+                    new item(
+                        tempItems[i][0], 
+                        // NAME
+                        Convert.ToInt32(tempItems[i][1]), 
+                        // TYPE
+                        Convert.ToInt32(tempItems[i][2])
+                        // LEVEL
+                        )
+                    );
             }
-            for (int i = 0; i < crew.Count; i++)
+            for (int i = 0; i < tempCrew.Count; i++)
             {
-                for (int j = 0; j < crew[i].Count; j++)
-                {
-                    Console.WriteLine(crew[i][j]);
-                }
+                loadedCrews.Add(
+                    new Crew(
+                        tempCrew[i][0], 
+                        // NAME
+                        Convert.ToInt32(tempCrew[i][1]),
+                        // COST
+                        Convert.ToInt32(tempCrew[i][2]),
+                        // LOYALTY
+                        Convert.ToInt32(tempCrew[i][3]),
+                        // OFFENSE
+                        Convert.ToInt32(tempCrew[i][4]),
+                        // DEFENSE
+                        Convert.ToInt32(tempCrew[i][5]),
+                        // SKILL
+                        Convert.ToInt32(tempCrew[i][6]),
+                        // COVERT
+                        Convert.ToInt32(tempCrew[i][7])
+                        // POPULARITY
+                        )
+                    );
             }
         }
 
@@ -57,9 +92,8 @@ namespace MafiaSimulator
                     var tempText = new UTF8Encoding(true);
                     List<string> textinfo = new List<string>();
                     while (tempFileStream.Read(tempArray,0,tempArray.Length) > 0)
-                    {
                         textinfo.Add(tempText.GetString(tempArray));
-                    }
+                    
                     fileInfo.Add(textinfo);
                 }
             }
