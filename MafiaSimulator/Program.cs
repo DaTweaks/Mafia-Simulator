@@ -3,6 +3,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Threading;
+using MafiaSimulator.Data;
 using MafiaSimulator.Utils;
 
 namespace MafiaSimulator
@@ -12,6 +13,7 @@ namespace MafiaSimulator
         public static void Main(string[] args)
         {
             DataManager.FetchData();
+            DataManager.myHighScore.Write();
         }
 
         public static void ContinueText()

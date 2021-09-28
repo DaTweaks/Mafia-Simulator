@@ -1,0 +1,2 @@
+MONEY: 10000		# Starting money (must be higher than 0)
+popularity: 10		# Starting Popularity (must be higher than 0)

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
+using MafiaSimulator.Data;
 
 namespace MafiaSimulator.Utils
 {
@@ -15,13 +17,22 @@ namespace MafiaSimulator.Utils
 
         public void Write()
         {
+            if(DataManager.myHighScore.AccessScore >= DataManager.myPlayer.AccessScore && !myFileName.Contains("Highscore"))
+                return;
             
+            var tempVariables = GetVariables();
+
+            var tempArray = File.ReadAllLines(myFileName);
+            tempArray[0].Replace(tempVariables["name"], DataManager.myPlayer.AccessName);
+            tempArray[1].Replace(tempVariables["score"], DataManager.myPlayer.AccessScore.ToString());
+            tempArray[2].Replace(tempVariables["date"], DateTime.Today.ToString().Replace(" 00:00:00", ""));
+            
+            File.WriteAllLines(myFileName, tempArray);
         }
 
         protected Dictionary<string, string> GetVariables()
         {
-            var tempLines = File.ReadAllLines(myFileName); // Note to self, could not be full path
-
+            var tempLines = File.ReadAllLines(myFileName);
             Dictionary<string, string> tempVariables = new Dictionary<string, string>();
             
             for (int i = 0; i < tempLines.Length; i++)
@@ -49,7 +60,7 @@ namespace MafiaSimulator.Utils
         
         protected int ConvertToIntParameter(string aVariable, string aKey)
         {
-            if (!int.TryParse(aVariable, out var tempConverted) || tempConverted < 0)
+            if (!int.TryParse(aVariable, out var tempConverted))
                 ConvertFailed(aKey, myFileName);
             return tempConverted;
         }

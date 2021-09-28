@@ -1,2 +1,3 @@
-NAME: Jeb 	# Player Name
-SCORE: 0	# Score :D
+NAME: Jeb 		# Player Name
+SCORE: 0		# Score :D
+TIME: 2021-09-28	# when the highscore was beaten, YEAR-MONTH-DAY

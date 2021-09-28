@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using MafiaSimulator.Data;
 
 namespace MafiaSimulator.Utils
 {
@@ -10,13 +11,17 @@ namespace MafiaSimulator.Utils
         public static List<Item> myItems = new List<Item>();
         public static List<Crew> myCrews = new List<Crew>();
         
-        private static Tuple<string, int> myHighScore;
+        public static Highscore myHighScore;
+
+        public static Player myPlayer;
 
         public static void FetchData()
         {
             FetchBankData();
             FetchItemData();
             FetchCrewData();
+            FetchHighscoreData();
+            FetchPlayerData();
         }
         
         
@@ -58,6 +63,20 @@ namespace MafiaSimulator.Utils
                 tempCrew.Load();
                 myCrews.Add(tempCrew);
             }
+        }
+
+        private static void FetchHighscoreData()
+        {
+            var tempHighscore = new Highscore(Path.GetFullPath($"GameData/Highscore.txt"));
+            tempHighscore.Load();
+            myHighScore = tempHighscore;
+        }
+
+        private static void FetchPlayerData()
+        {
+            var tempPlayer = new Player(Path.GetFullPath($"GameData/PlayerStartingValues.txt"));
+            tempPlayer.Load();
+            myPlayer = tempPlayer;
         }
         
         private static string[] GetFiles(string aPath) => Directory.GetFiles(Path.GetFullPath($"GameData/{aPath}"));
