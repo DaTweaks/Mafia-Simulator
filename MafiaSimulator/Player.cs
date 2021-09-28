@@ -2,7 +2,9 @@
 {
     public class Player
     {
-        public Player(string name)
+        public Player(
+            string name
+            )
         {
             myName = name;
         }

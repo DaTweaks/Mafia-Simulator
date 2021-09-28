@@ -11,7 +11,7 @@
             int skill,
             int covert,
             int unlockPopularity
-        )
+            )
         {
             myName = name;
             myCost = cost;
@@ -21,7 +21,6 @@
             mySkill = skill;
             myCovert = covert;
             myUnlockPopularity = unlockPopularity;
-
         }
 
         private string myName;
