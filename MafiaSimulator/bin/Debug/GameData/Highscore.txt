@@ -1,2 +1,2 @@
-(Banks heisted)
-(Player Name)
+NAME: Jeb 	# Player Name
+SCORE: 0	# Score :D

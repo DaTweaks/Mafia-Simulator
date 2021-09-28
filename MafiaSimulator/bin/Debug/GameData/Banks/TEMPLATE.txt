@@ -1,7 +1,6 @@
-NAME (can't be empty)
-MONEYGAINED (> 0, the amount of money gained by a completed heist)
-SECURITY (> 0, how secure the bank is)
-GULLIBILITY (> 0, how easily tricked the bank is)
-POPULARITY (> 0, the amount of popularity needed to unlock)
-POPULARITYGAINED (> 0, the amount of popularity gained from heisting)
-(all parenteses must be removed)
+NAME: Bob's Finance 		# can't be empty
+MONEYGAINED: 69420 		# > 0, the amount of money gained by a completed heist
+SECURITY: 20 			# > 0, how secure the bank is
+GULLIBILITY: 1 			# > 0, how easily tricked the bank is
+POPULARITY: 20 			# > 0, the amount of popularity needed to unlock
+POPULARITYGAINED: 50		# > 0, the amount of popularity gained from heisting
