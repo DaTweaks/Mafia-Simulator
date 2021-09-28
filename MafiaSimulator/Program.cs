@@ -13,7 +13,7 @@ namespace MafiaSimulator
         public static void Main(string[] args)
         {
             DataManager.FetchData();
-            DataManager.myHighScore.Write();
+            StartMenu();
         }
 
         public static void ContinueText()
