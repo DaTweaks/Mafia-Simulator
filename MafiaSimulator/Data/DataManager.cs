@@ -1,84 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using MafiaSimulator.Data;
 
 namespace MafiaSimulator.Utils
 {
     public static class DataManager
     {
-        public static List<Bank> myBanks = new List<Bank>();
-        public static List<Item> myItems = new List<Item>();
-        public static List<Crew> myCrews = new List<Crew>();
+        public static Dictionary<Type, List<object>> myContent = new Dictionary<Type, List<object>>();
         
         public static Highscore myHighScore;
-
         public static Player myPlayer;
 
         public static void FetchData()
         {
-            FetchBankData();
-            FetchItemData();
-            FetchCrewData();
-            FetchHighscoreData();
-            FetchPlayerData();
+            FetchFolderData("Banks",typeof(Bank));
+            FetchFolderData("Items",typeof(Item));
+            FetchFolderData("Crew",typeof(Crew));
+            FetchFolderData("Highscore",typeof(Highscore));
+            FetchFolderData("PlayerStartingValues",typeof(Player));
         }
-        
-        
-        private static void FetchBankData()
+
+        private static void FetchFolderData(string aPath, Type aClassType)
         {
-            
-            var tempFiles = GetFiles("Banks");
+            if (aClassType.IsAssignableFrom(typeof(DataHolder)))
+            {
+                Console.WriteLine("wrong loading type in datamanager, fix pls");
+                Program.ContinueText();
+                Environment.Exit(0);
+                return;
+            }
+
+            var tempFiles = GetFiles(aPath);
             for (int i = 0; i < tempFiles.Length; i++)
             {
-                if(tempFiles[i].ToLower().Contains("template"))
+                if (tempFiles[i].ToLower().Contains("template"))
                     continue;
-                var tempBank = new Bank(tempFiles[i]);
-                tempBank.Load();
-                myBanks.Add(tempBank);
+                
+                var tempObj = aClassType.GetConstructor(new[] {typeof(string)})
+                    ?.Invoke(new object[] {tempFiles[i]});
+                (tempObj as DataHolder)?.Load();
+                
+                if(!myContent.ContainsKey(aClassType))
+                    myContent.Add(aClassType, new List<object>());
+                myContent[aClassType].Add(tempObj);
             }
         }
 
-        private static void FetchItemData()
-        {
-            var tempFiles = GetFiles("Items");
-            for (int i = 0; i < tempFiles.Length; i++)
-            {
-                if(tempFiles[i].ToLower().Contains("template"))
-                    continue;
-                var tempItem = new Item(tempFiles[i]);
-                tempItem.Load();
-                myItems.Add(tempItem);
-            }
-        }
-
-        private static void FetchCrewData()
-        {
-            var tempFiles = GetFiles("Crew");
-            for (int i = 0; i < tempFiles.Length; i++)
-            {
-                if(tempFiles[i].ToLower().Contains("template"))
-                    continue;
-                var tempCrew = new Crew(tempFiles[i]);
-                tempCrew.Load();
-                myCrews.Add(tempCrew);
-            }
-        }
-
-        private static void FetchHighscoreData()
-        {
-            var tempHighscore = new Highscore(Path.GetFullPath($"GameData/Highscore.txt"));
-            tempHighscore.Load();
-            myHighScore = tempHighscore;
-        }
-
-        private static void FetchPlayerData()
-        {
-            var tempPlayer = new Player(Path.GetFullPath($"GameData/PlayerStartingValues.txt"));
-            tempPlayer.Load();
-            myPlayer = tempPlayer;
-        }
-        
         private static string[] GetFiles(string aPath) => Directory.GetFiles(Path.GetFullPath($"GameData/{aPath}"));
     }
 }

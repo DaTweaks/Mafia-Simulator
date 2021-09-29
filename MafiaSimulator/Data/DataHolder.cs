@@ -17,14 +17,11 @@ namespace MafiaSimulator.Utils
 
         public void Write()
         {
-            if(DataManager.myHighScore.AccessScore >= DataManager.myPlayer.AccessScore && !myFileName.Contains("Highscore"))
-                return;
-            
             var tempVariables = GetVariables();
 
             var tempArray = File.ReadAllLines(myFileName);
-            tempArray[0].Replace(tempVariables["name"], DataManager.myPlayer.AccessName);
-            tempArray[1].Replace(tempVariables["score"], DataManager.myPlayer.AccessScore.ToString());
+            tempArray[0].Replace(tempVariables["name"], DataManager.myPlayer.GetName);
+            tempArray[1].Replace(tempVariables["score"], DataManager.myPlayer.GetScore.ToString());
             tempArray[2].Replace(tempVariables["date"], DateTime.Today.ToString().Replace(" 00:00:00", ""));
             
             File.WriteAllLines(myFileName, tempArray);

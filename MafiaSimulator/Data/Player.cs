@@ -7,16 +7,16 @@ namespace MafiaSimulator
     public class Player : DataHolder
     {
         private string myName;
-        public string AccessName {get => myName;}
+        public string GetName {get => myName;}
 
         private int myScore;
-        public int AccessScore {get => myScore;}
+        public int GetScore {get => myScore;}
         
         private int myMoney;
-        public int AccessMoney {get => myMoney;}
+        public int GetMoney {get => myMoney;}
         
         private int myPopularity;
-        public int AccessPopularity {get => myPopularity;}
+        public int GetPopularity {get => myPopularity;}
 
         public List<Crew> myCrew = new List<Crew>();
 

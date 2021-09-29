@@ -1,9 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
-using System.Collections.Generic;
-using System.Threading;
-using MafiaSimulator.Data;
 using MafiaSimulator.Utils;
 
 namespace MafiaSimulator
