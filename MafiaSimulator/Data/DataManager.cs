@@ -20,7 +20,7 @@ namespace MafiaSimulator.Utils
             FetchFolderData("PlayerStartingValues",typeof(Player));
         }
 
-        private static void FetchFolderData(string aPath, Type aClassType)
+        public static void FetchFolderData(string aPath, Type aClassType)
         {
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {

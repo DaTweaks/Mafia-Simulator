@@ -30,6 +30,7 @@ namespace MafiaSimulator
         {
             var tempVariables = GetVariables();
 
+            myName = "";
             myScore = 0;
             myMoney = ConvertToIntParameter(tempVariables["money"], "money");
             myPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");

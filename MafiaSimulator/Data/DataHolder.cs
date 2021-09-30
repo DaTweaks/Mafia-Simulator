@@ -8,24 +8,14 @@ namespace MafiaSimulator.Utils
 {
     public abstract class DataHolder
     {
-        private string myFileName;
+        protected string myFileName;
         
         protected DataHolder(string aFileName)
         {
             myFileName = aFileName;
         }
 
-        public void Write()
-        {
-            var tempVariables = GetVariables();
-
-            var tempArray = File.ReadAllLines(myFileName);
-            tempArray[0].Replace(tempVariables["name"], (DataManager.myContent[typeof(Player)][0] as Player).AccessName);
-            tempArray[1].Replace(tempVariables["score"], (DataManager.myContent[typeof(Player)][0] as Player).GetScore.ToString());
-            tempArray[2].Replace(tempVariables["date"], DateTime.Today.ToString().Replace(" 00:00:00", ""));
-            
-            File.WriteAllLines(myFileName, tempArray);
-        }
+        public virtual void Write() {}
 
         protected Dictionary<string, string> GetVariables()
         {

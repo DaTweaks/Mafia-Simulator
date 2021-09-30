@@ -3,15 +3,15 @@ using MafiaSimulator.Utils; // i do as rider commands.
 
 namespace MafiaSimulator
 {
-    public class MainmenuScene : SceneHolder
+    public class MainMenuScene : SceneHolder
     {
         public override void Start()
         {
             while (true)
             {
+                Console.Clear();
                 try
                 {
-                    Console.Clear();
                     Program.DisplayPlayerStats(ConsoleColor.Blue);
                     Program.ConsoleWriteLine(@"
 1 : Heist a Bank!

@@ -16,6 +16,7 @@ namespace MafiaSimulator
                 (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessScore = (DataManager.myContent[typeof(Player)][0] as Player).GetScore;
                 (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
             }
+            DataManager.FetchFolderData("PlayerStartingValues",typeof(Player));
             Program.ConsoleWriteContinue("You lost!",ConsoleColor.Red,ConsoleColor.Red);
         }
     }

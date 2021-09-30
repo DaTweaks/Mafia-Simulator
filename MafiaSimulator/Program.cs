@@ -46,8 +46,7 @@ Current Highscore
                             SceneManager.LoadScene(typeof(SetupScene));
                             break;
                         case 2:
-                            ConsoleWriteLine("Now Exiting!", ConsoleColor.Red);
-                            Thread.Sleep(1000);
+                            ConsoleWriteLine("Now Exiting!", ConsoleColor.Red, true);
                             Environment.Exit(0);
                             break;
                         default:

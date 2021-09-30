@@ -51,7 +51,7 @@
         <Compile Include="Scenes\BlackmarketScene.cs" />
         <Compile Include="Scenes\CrewMenuScene.cs" />
         <Compile Include="Scenes\EndingScene.cs" />
-        <Compile Include="Scenes\MainmenuScene.cs" />
+        <Compile Include="Scenes\MainMenuScene.cs" />
         <Compile Include="Scenes\RecruitmentScene.cs" />
         <Compile Include="Scenes\SceneHolder.cs" />
         <Compile Include="Scenes\SceneManager.cs" />
