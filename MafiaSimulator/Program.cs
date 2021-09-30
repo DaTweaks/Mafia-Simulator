@@ -30,7 +30,7 @@ namespace MafiaSimulator
 | $$\  $ | $$ /$$__  $$| $$      | $$ /$$__  $$       /$$  \ $$| $$| $$ | $$ | $$| $$  | $$| $$ /$$__  $$  | $$ /$$| $$  | $$| $$      
 | $$ \/  | $$|  $$$$$$$| $$      | $$|  $$$$$$$      |  $$$$$$/| $$| $$ | $$ | $$|  $$$$$$/| $$|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
 |__/     |__/ \_______/|__/      |__/ \_______/       \______/ |__/|__/ |__/ |__/ \______/ |__/ \_______/   \___/   \______/ |__/      
-=======================================================================================================================================", ConsoleColor.White);
+=======================================================================================================================================");
                     ConsoleWriteLine($@"
 Current Highscore
    Score: {(DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessScore}
@@ -38,11 +38,12 @@ Current Highscore
     Date: {(DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessDate}");
                     ConsoleWriteLine(@"
 1 : Start the game!
-2 : Exit The game!", ConsoleColor.Cyan, true);
+2 : Exit The game!
+", ConsoleColor.Cyan, true);
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            ConsoleWriteContinue("Starting the game!", ConsoleColor.Cyan, ConsoleColor.Green);
+                            ConsoleWriteContinue("Starting the game!");
                             SceneManager.LoadScene(typeof(SetupScene));
                             break;
                         case 2:
@@ -80,9 +81,10 @@ Current Highscore
                 Console.ReadKey(true);
         }
 
-        public static void ConsoleWriteContinue(string aMessage,ConsoleColor aMessageColor = ConsoleColor.Cyan, ConsoleColor aContinueColor = ConsoleColor.Green)
+        public static void ConsoleWriteContinue(string aMessage = "",ConsoleColor aMessageColor = ConsoleColor.Cyan, ConsoleColor aContinueColor = ConsoleColor.Green)
         {
-            ConsoleWriteLine(aMessage, aMessageColor);
+            if(!string.IsNullOrEmpty(aMessage)) 
+                ConsoleWriteLine(aMessage, aMessageColor);
             ConsoleWriteLine("Press any key to continue!", aContinueColor, true);
         }
     }

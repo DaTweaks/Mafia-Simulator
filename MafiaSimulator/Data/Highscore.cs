@@ -19,51 +19,36 @@ namespace MafiaSimulator.Data
         
         public override void Write()
         {
-            var tempVariables = GetVariables();
-
             var tempArray = File.ReadAllLines(myFileName);
-
-            for (int i = 0; i < tempArray.Length; i++)
-            {
-                if (tempArray[i].StartsWith("#") || !tempArray[i].Contains(":"))
-                    continue;
-
-                var tempStringSplit = tempArray[i].Split(':');
-                var tempKey = tempStringSplit[0]+":";
-
-                var tempValue = "";
-                
-                for (int j = 1; j < tempStringSplit.Length; j++)
-                    tempValue += tempStringSplit[j];
-
-                var tempIndex = tempValue.IndexOf('#');
-
-                if (tempIndex != -1)
-                    tempValue = tempValue.Substring(0,tempIndex);
-                
-                tempVariables.Add(tempKey.Trim().ToLower(),tempValue.Trim());
-            }
 
             myName = (DataManager.myContent[typeof(Player)][0] as Player).AccessName;
             myScore = (DataManager.myContent[typeof(Player)][0] as Player).GetScore;
             myDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
+
+            tempArray[0] = EditLine(tempArray[0], myName);
+            tempArray[1] = EditLine(tempArray[1], myScore.ToString());
+            tempArray[2] = EditLine(tempArray[2], myDate);
 
             File.WriteAllLines(myFileName, tempArray);
         }
         
         private string EditLine(string aLine, string aReplaceVariable)
         {
-            if (aLine.StartsWith("#") || !aLine.Contains(":"))
-                return aLine;
-            
             var tempStringSplit = aLine.Split(':');
 
-            string tempValue = "";
+            tempStringSplit[0] += ": ";
+
+            var tempAfterKeySplit = tempStringSplit[1].Split('#');
+
+            tempAfterKeySplit[0] = aReplaceVariable;
+            tempAfterKeySplit[1] = " #" + tempAfterKeySplit[1];
+
+            string tempJoin = "";
             
-            for (int j = 1; j < tempStringSplit.Length; j++)
-                tempValue += tempStringSplit[j];
-            
-            
+            for (int i = 0; i < tempAfterKeySplit.Length; i++)
+                tempJoin += tempAfterKeySplit[i];
+
+            return tempStringSplit[0] + tempJoin;
         }
         
         public override void Load()
