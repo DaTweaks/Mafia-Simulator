@@ -27,7 +27,7 @@ namespace MafiaSimulator.Utils
         {
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {
-                Console.WriteLine("wrong loading type in datamanager, fix pls");
+                Console.WriteLine("the Class doesn't have the DataHolder extension.");
                 Program.ContinueText();
                 Environment.Exit(0);
                 return;
@@ -42,7 +42,7 @@ namespace MafiaSimulator.Utils
                 var tempObj = aClassType.GetConstructor(new[] {typeof(string)})
                     ?.Invoke(new object[] {tempFiles[i]});
                 (tempObj as DataHolder)?.Load();
-                
+
                 if(!myContent.ContainsKey(aClassType))
                     myContent.Add(aClassType, new List<object>());
                 myContent[aClassType].Add(tempObj);

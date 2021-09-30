@@ -36,6 +36,7 @@ namespace MafiaSimulator.Utils
             {
                 if (tempLines[i].StartsWith("#") || !tempLines[i].Contains(":"))
                     continue;
+                
                 var tempStringSplit = tempLines[i].Split(':');
                 var tempKey = tempStringSplit[0];
 
