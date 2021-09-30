@@ -47,9 +47,15 @@
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Data\DataHolder.cs" />
         <Compile Include="Data\DataManager.cs" />
+        <Compile Include="Scenes\BankScene.cs" />
+        <Compile Include="Scenes\BlackmarketScene.cs" />
+        <Compile Include="Scenes\EndingScene.cs" />
+        <Compile Include="Scenes\MainmenuScene.cs" />
+        <Compile Include="Scenes\RecruitmentScene.cs" />
         <Compile Include="Scenes\SceneHolder.cs" />
         <Compile Include="Scenes\SceneManager.cs" />
         <Compile Include="Scenes\SetupScene.cs" />
+        <Compile Include="Scenes\WareHouseScene.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
