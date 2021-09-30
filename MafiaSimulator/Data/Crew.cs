@@ -36,7 +36,7 @@ namespace MafiaSimulator
             var tempVariables = GetVariables();
             
             myName = IsCorrectCheck(tempVariables["name"],"name");
-            Console.WriteLine(myName);
+            Program.ConsoleWriteLine(myName, ConsoleColor.Green);
             myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
             myLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
             myOffense = ConvertToIntParameter(tempVariables["offense"], "offense");

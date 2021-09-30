@@ -7,7 +7,7 @@ namespace MafiaSimulator
     public class Player : DataHolder
     {
         private string myName;
-        public string GetName {get => myName;}
+        public string AccessName {get => myName; set => myName = value; }
 
         private int myScore;
         public int GetScore {get => myScore;}
@@ -28,6 +28,7 @@ namespace MafiaSimulator
         {
             var tempVariables = GetVariables();
 
+            myScore = 0;
             myMoney = ConvertToIntParameter(tempVariables["money"], "money");
             myPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }

@@ -10,9 +10,6 @@ namespace MafiaSimulator.Utils
     public static class DataManager
     {
         public static Dictionary<Type, List<object>> myContent = new Dictionary<Type, List<object>>();
-        
-        public static Highscore myHighScore;
-        public static Player myPlayer;
 
         public static void FetchData()
         {
@@ -28,7 +25,7 @@ namespace MafiaSimulator.Utils
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {
                 Console.WriteLine("the Class doesn't have the DataHolder extension.");
-                Program.ContinueText();
+                Program.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red, true);
                 Environment.Exit(0);
                 return;
             }

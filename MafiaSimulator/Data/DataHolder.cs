@@ -20,8 +20,8 @@ namespace MafiaSimulator.Utils
             var tempVariables = GetVariables();
 
             var tempArray = File.ReadAllLines(myFileName);
-            tempArray[0].Replace(tempVariables["name"], DataManager.myPlayer.GetName);
-            tempArray[1].Replace(tempVariables["score"], DataManager.myPlayer.GetScore.ToString());
+            tempArray[0].Replace(tempVariables["name"], (DataManager.myContent[typeof(Player)][0] as Player).AccessName);
+            tempArray[1].Replace(tempVariables["score"], (DataManager.myContent[typeof(Player)][0] as Player).GetScore.ToString());
             tempArray[2].Replace(tempVariables["date"], DateTime.Today.ToString().Replace(" 00:00:00", ""));
             
             File.WriteAllLines(myFileName, tempArray);
@@ -73,7 +73,7 @@ namespace MafiaSimulator.Utils
         protected void ConvertFailed(string aKey, string aFileName)
         {
             Console.WriteLine($"Converting Failed! at the file: {aFileName} at the key: {aKey}");
-            Program.ContinueText();
+            Program.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red);
             Environment.Exit(0); 
         }
 
