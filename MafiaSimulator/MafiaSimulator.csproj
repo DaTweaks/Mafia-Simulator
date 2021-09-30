@@ -49,6 +49,7 @@
         <Compile Include="Data\DataManager.cs" />
         <Compile Include="Scenes\BankScene.cs" />
         <Compile Include="Scenes\BlackmarketScene.cs" />
+        <Compile Include="Scenes\CrewMenuScene.cs" />
         <Compile Include="Scenes\EndingScene.cs" />
         <Compile Include="Scenes\MainmenuScene.cs" />
         <Compile Include="Scenes\RecruitmentScene.cs" />

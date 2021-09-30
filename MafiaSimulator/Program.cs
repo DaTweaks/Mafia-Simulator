@@ -14,16 +14,6 @@ namespace MafiaSimulator
             StartMenu();
         }
 
-        public static void ConsoleWriteLine(string aMessage, ConsoleColor aColor = ConsoleColor.Cyan, bool tempWait = false)
-        {
-            ConsoleColor tempColor = Console.ForegroundColor;
-            Console.ForegroundColor = aColor;
-            Console.WriteLine(aMessage);
-            Console.ForegroundColor = tempColor;
-            if(tempWait) 
-                Console.ReadKey(true);
-        }
-        
         public static void StartMenu()
         {
             while (true)
@@ -52,9 +42,8 @@ Current Highscore
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            ConsoleWriteLine("Starting the game!");
-                            ConsoleWriteLine("Press any key to continue!", ConsoleColor.Green, true);
-                            MenuManager.LoadScene(typeof(SetupScene));
+                            ConsoleWriteContinue("Starting the game!", ConsoleColor.Cyan, ConsoleColor.Green);
+                            SceneManager.LoadScene(typeof(SetupScene));
                             break;
                         case 2:
                             ConsoleWriteLine("Now Exiting!", ConsoleColor.Red);
@@ -67,9 +56,35 @@ Current Highscore
                 }
                 catch (Exception e)
                 {
-                    ConsoleWriteLine(e.ToString(), ConsoleColor.Red, true);
+                    ConsoleWriteContinue(e.ToString(), ConsoleColor.Red, ConsoleColor.Red);
                 }
             }
+        }
+        
+        public static void DisplayPlayerStats(ConsoleColor aColor)
+        {
+            ConsoleWriteLine("======================================", aColor);
+            ConsoleWriteLine($" Name        : {(DataManager.myContent[typeof(Player)][0] as Player).AccessName}", aColor);
+            ConsoleWriteLine($" Score       : {(DataManager.myContent[typeof(Player)][0] as Player).GetScore}", aColor);
+            ConsoleWriteLine($" Money       : {(DataManager.myContent[typeof(Player)][0] as Player).GetMoney}", aColor);
+            ConsoleWriteLine($" Popularity  : {(DataManager.myContent[typeof(Player)][0] as Player).GetPopularity}", aColor);
+            ConsoleWriteLine("======================================", aColor);
+        }
+        
+        public static void ConsoleWriteLine(string aMessage, ConsoleColor aColor = ConsoleColor.Cyan, bool tempWait = false)
+        {
+            ConsoleColor tempColor = Console.ForegroundColor;
+            Console.ForegroundColor = aColor;
+            Console.WriteLine(aMessage);
+            Console.ForegroundColor = tempColor;
+            if(tempWait) 
+                Console.ReadKey(true);
+        }
+
+        public static void ConsoleWriteContinue(string aMessage,ConsoleColor aMessageColor = ConsoleColor.Cyan, ConsoleColor aContinueColor = ConsoleColor.Green)
+        {
+            ConsoleWriteLine(aMessage, aMessageColor);
+            ConsoleWriteLine("Press any key to continue!", aContinueColor, true);
         }
     }
 }

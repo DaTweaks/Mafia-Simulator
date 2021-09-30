@@ -22,7 +22,9 @@ namespace MafiaSimulator
 
         public List<Item> myItems = new List<Item>();
         
-        public Player(string aFileName) : base(aFileName) { } 
+        public Player(string aFileName) : base(aFileName) { }
+
+
         
         public override void Load()
         {

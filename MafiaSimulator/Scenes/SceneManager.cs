@@ -3,14 +3,13 @@ using System.Reflection;
 
 namespace MafiaSimulator
 {
-    public static class MenuManager
+    public static class SceneManager
     {
         public static void LoadScene(Type aScene)
         {
             if (aScene.IsAssignableFrom(typeof(SceneHolder)))
             {
-                Console.WriteLine("the desired Scene doesn't have the SceneHolder Extension");
-                Program.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red, true);
+                Program.ConsoleWriteContinue("the desired Scene doesn't have the SceneHolder Extension", ConsoleColor.Red, ConsoleColor.Red);
                 Environment.Exit(0);
             }
 
