@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Reflection;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Scenes
 {
     public static class SceneManager
     {

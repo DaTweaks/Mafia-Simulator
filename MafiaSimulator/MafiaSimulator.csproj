@@ -40,7 +40,7 @@
     <ItemGroup>
         <Compile Include="Data\Bank.cs" />
         <Compile Include="Data\Crew.cs" />
-        <Compile Include="Data\Highscore.cs" />
+        <Compile Include="Data\HighScore.cs" />
         <Compile Include="Data\Item.cs" />
         <Compile Include="Data\Player.cs" />
         <Compile Include="Program.cs" />

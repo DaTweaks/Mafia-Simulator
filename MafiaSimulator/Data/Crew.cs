@@ -1,49 +1,48 @@
 ﻿using System;
-using MafiaSimulator.Utils;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Data
 {
     public class Crew : DataHolder
     {
-        private string myName;
-        public string AccessName {get => myName;}
-            
-        private int myCost;
-        public int AccessCost {get => myCost;}
+        private string MyName;
+        public string GetName => MyName;
+
+        private int MyCost;
+        public int GetCost => MyCost;
+
+        private int MyLoyalty;
+        public int GetLoyalty => MyLoyalty;
+
+        private int MyOffense;
+        public int GetOffense => MyOffense;
+
+        private int MyDefense;
+        public int GetDefense => MyDefense;
         
-        private int myLoyalty;
-        public int AccessLoyalty {get => myLoyalty;}
+        private int MySkill;
+        public int GetSkill => MySkill;
         
-        private int myOffense;
-        public int AccessOffense {get => myOffense;}
+        private int MyCovert;
+        public int GetCovert => MyCovert;
         
-        private int myDefense;
-        public int AccessDefense {get => myDefense;}
-        
-        private int mySkill;
-        public int AccessSkill {get => mySkill;}
-        
-        private int myCovert;
-        public int AccessCovert {get => myCovert;}
-        
-        private int myUnlockPopularity;
-        public int AccessUnlockPopularity {get => myUnlockPopularity;}
-        
+        private int MyUnlockPopularity;
+        public int GetUnlockPopularity => MyUnlockPopularity;
+
         public Crew(string aFileName) : base(aFileName) { } 
         
         public override void Load()
         {
             var tempVariables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            Program.ConsoleWriteLine(myName, ConsoleColor.Green);
-            myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
-            myLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
-            myOffense = ConvertToIntParameter(tempVariables["offense"], "offense");
-            myDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
-            mySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
-            myCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
-            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            MyName = IsCorrectCheck(tempVariables["name"],"name");
+            Program.ConsoleWriteLine(MyName, ConsoleColor.Green);
+            MyCost = ConvertToIntParameter(tempVariables["cost"], "cost");
+            MyLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
+            MyOffense = ConvertToIntParameter(tempVariables["offense"], "offense");
+            MyDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
+            MySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
+            MyCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
+            MyUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using MafiaSimulator.Data;
-using MafiaSimulator.Utils;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Scenes
 {
     public class StartMenu : SceneHolder
     {
@@ -23,16 +22,15 @@ namespace MafiaSimulator
 | $$ \/  | $$|  $$$$$$$| $$      | $$|  $$$$$$$      |  $$$$$$/| $$| $$ | $$ | $$|  $$$$$$/| $$|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
 |__/     |__/ \_______/|__/      |__/ \_______/       \______/ |__/|__/ |__/ |__/ \______/ |__/ \_______/   \___/   \______/ |__/      
 =======================================================================================================================================");
-                    var tempHighscore = DataManager.FetchMyContent<Highscore>(0);
+                    var tempHighscore = DataManager.FetchMyContent<HighScore>(0);
                     Program.ConsoleWriteLine($@"
-Current Highscore
-   Score: {tempHighscore.AccessScore}
-    Name: {tempHighscore.AccessName}
-    Date: {tempHighscore.AccessDate}");
+Current HighScore
+   Score: {tempHighscore.MyScore}
+    Name: {tempHighscore.MyName}
+    Date: {tempHighscore.MyDate}");
                     Program.ConsoleWriteLine(@"
 1 : Start the game!
-2 : Exit The game!
-", ConsoleColor.Cyan, true);
+2 : Exit The game!", ConsoleColor.Cyan, true);
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:

@@ -1,7 +1,7 @@
 ﻿using System;
-using MafiaSimulator.Utils;
+using MafiaSimulator.Data;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Scenes
 {
     public class SetupScene : SceneHolder
     {
@@ -14,9 +14,9 @@ namespace MafiaSimulator
                 {
                     Program.ConsoleWriteLine("Input your Name!");
                     string aName = Console.ReadLine();
-                    if (aName.Length <= 0 || aName.Length > 15)
+                    if (string.IsNullOrEmpty(aName) || aName.Length <= 0 || aName.Length > 15)
                         throw new Exception($"The Name is too {(aName.Length <= 0 ? "Short" : "Long")}!");
-                    DataManager.FetchMyContent<Player>(0).AccessName = aName;
+                    DataManager.FetchMyContent<Player>(0).MyName = aName;
                     SceneManager.LoadScene<MainMenuScene>();
                 }
                 catch (Exception e)

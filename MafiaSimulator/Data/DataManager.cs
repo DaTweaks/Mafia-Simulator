@@ -1,29 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using MafiaSimulator.Data;
 
-namespace MafiaSimulator.Utils
+namespace MafiaSimulator.Data
 {
     public static class DataManager
     {
-        public static Dictionary<Type, List<object>> myContent = new Dictionary<Type, List<object>>();
-
-        public static T FetchMyContent<T>(int myPosition) where T : class => myContent[typeof(T)][myPosition] as T; // i do as rider commands
+        private static Dictionary<Type, List<object>> MyContent = new Dictionary<Type, List<object>>();
         
         public static void FetchData()
         {
-            FetchFolderData("Banks",typeof(Bank));
-            FetchFolderData("Items",typeof(Item));
-            FetchFolderData("Crew",typeof(Crew));
-            FetchFolderData("Highscore",typeof(Highscore));
-            FetchFolderData("PlayerStartingValues",typeof(Player));
+            FetchFolderData<Bank>("Banks");
+            FetchFolderData<Item>("Items");
+            FetchFolderData<Crew>("Crew");
+            FetchFolderData<HighScore>("HighScore");
+            FetchFolderData<Player>("PlayerStartingValues");
         }
 
-        public static void FetchFolderData(string aPath, Type aClassType)
+        public static void FetchFolderData<T>(string aPath)
         {
+            Type aClassType = typeof(T);
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {
                 Console.WriteLine("the Class doesn't have the DataHolder extension.");
@@ -42,11 +38,13 @@ namespace MafiaSimulator.Utils
                     ?.Invoke(new object[] {tempFiles[i]});
                 (tempObj as DataHolder)?.Load();
 
-                if(!myContent.ContainsKey(aClassType))
-                    myContent.Add(aClassType, new List<object>());
-                myContent[aClassType].Add(tempObj);
+                if(!MyContent.ContainsKey(aClassType))
+                    MyContent.Add(aClassType, new List<object>());
+                MyContent[aClassType].Add(tempObj);
             }
         }
+
+        public static T FetchMyContent<T>(int myPosition) where T : class => MyContent[typeof(T)][myPosition] as T;
 
         private static string[] GetFiles(string aPath) => Directory.GetFiles(Path.GetFullPath($"GameData/{aPath}"));
     }

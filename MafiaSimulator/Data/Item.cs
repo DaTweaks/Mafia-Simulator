@@ -1,29 +1,28 @@
 ﻿using System;
-using MafiaSimulator.Utils;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Data
 {
     public class Item : DataHolder
     {
-        private string myName; 
-        public string AccessName {get => myName;}
+        private string MyName; 
+        public string GetName => MyName;
 
-        private int myType;
-        public int AccessType {get => myType;}
+        private int MyType;
+        public int GetType => MyType;
 
-        private int myLevel;
-        public int AccessLevel {get => myLevel;}
-        
+        private int MyLevel;
+        public int GetLevel => MyLevel;
+
         public Item(string aFileName) : base(aFileName) { } 
         
         public override void Load()
         {
             var tempVariables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            Program.ConsoleWriteLine(myName, ConsoleColor.Green);
-            myType = ConvertToIntParameter(tempVariables["type"], "type");
-            myLevel = ConvertToIntParameter(tempVariables["level"], "level");
+            MyName = IsCorrectCheck(tempVariables["name"],"name");
+            Program.ConsoleWriteLine(MyName, ConsoleColor.Green);
+            MyType = ConvertToIntParameter(tempVariables["type"], "type");
+            MyLevel = ConvertToIntParameter(tempVariables["level"], "level");
         }
     }
 }

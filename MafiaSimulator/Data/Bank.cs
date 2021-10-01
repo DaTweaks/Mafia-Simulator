@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Security.Cryptography;
-using MafiaSimulator.Utils;
+using MafiaSimulator.Data;
 
 namespace MafiaSimulator
 {
     public class Bank : DataHolder
     {
-        private string myName;
-        public string AccessName {get => myName;}
-                 
-        private int myMoneyReward;
-        public int AccessMoneyReward {get => myMoneyReward;}
-             
-        private int mySecurity;
-        public int AccessSecurity {get => mySecurity;}
-             
-        private int myGullibility;
-        public int AccessGullibility {get => myGullibility;}
-             
-        private int myUnlockPopularity;
-        public int AccessUnlockPopularity {get => myUnlockPopularity;}
-             
-        private int myPopularityReward;
-        public int AccessPopularityReward {get => myPopularityReward;}
+        private string MyName;
+        public string GetName => MyName;
+
+        private int MyMoneyReward;
+        public int GetMoneyReward => MyMoneyReward;
+
+        private int MySecurity;
+        public int GetSecurity => MySecurity;
+
+        private int MyGullibility;
+        public int GetGullibility => MyGullibility;
+
+        private int MyUnlockPopularity;
+        public int GetUnlockPopularity => MyUnlockPopularity;
+
+        private int MyPopularityReward;
+        public int GetPopularityReward => MyPopularityReward;
 
         public Bank(string aFileName) : base(aFileName) { } 
         
@@ -30,13 +30,13 @@ namespace MafiaSimulator
         {
             var tempVariables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            Program.ConsoleWriteLine(myName, ConsoleColor.Green);
-            myMoneyReward = ConvertToIntParameter(tempVariables["moneygained"], "moneygained");
-            mySecurity = ConvertToIntParameter(tempVariables["security"], "security");
-            myGullibility = ConvertToIntParameter(tempVariables["gullibility"], "gullibility");
-            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
-            myPopularityReward = ConvertToIntParameter(tempVariables["popularitygained"], "popularitygained");
+            MyName = IsCorrectCheck(tempVariables["name"],"name");
+            Program.ConsoleWriteLine(MyName, ConsoleColor.Green);
+            MyMoneyReward = ConvertToIntParameter(tempVariables["moneygained"], "moneygained");
+            MySecurity = ConvertToIntParameter(tempVariables["security"], "security");
+            MyGullibility = ConvertToIntParameter(tempVariables["gullibility"], "gullibility");
+            MyUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            MyPopularityReward = ConvertToIntParameter(tempVariables["popularitygained"], "popularitygained");
         }
     }
 }

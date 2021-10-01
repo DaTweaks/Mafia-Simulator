@@ -1,39 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using MafiaSimulator.Utils;
+﻿using System.Collections.Generic;
 
-namespace MafiaSimulator
+namespace MafiaSimulator.Data
 {
     public class Player : DataHolder
     {
-        private string myName;
-        public string AccessName {get => myName; set => myName = value; }
-
-        private int myScore;
-        public int GetScore {get => myScore;}
+        public string MyName;
         
-        private int myMoney;
-        public int GetMoney {get => myMoney;}
-        
-        private int myPopularity;
-        public int GetPopularity {get => myPopularity;}
+        public int MyScore;
 
-        public List<Crew> myCrew = new List<Crew>();
+        public int MyMoney;
 
-        public List<Item> myItems = new List<Item>();
+        public int MyPopularity;
+
+        public List<Crew> MyCrew = new List<Crew>();
+
+        public List<Item> MyItems = new List<Item>();
         
         public Player(string aFileName) : base(aFileName) { }
-
-
         
         public override void Load()
         {
             var tempVariables = GetVariables();
 
-            myName = "";
-            myScore = 0;
-            myMoney = ConvertToIntParameter(tempVariables["money"], "money");
-            myPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            MyName = "";
+            MyScore = 0;
+            MyMoney = ConvertToIntParameter(tempVariables["money"], "money");
+            MyPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }
     }
 }

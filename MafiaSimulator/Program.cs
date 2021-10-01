@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using MafiaSimulator.Data;
-using MafiaSimulator.Utils;
+using MafiaSimulator.Scenes;
 
 namespace MafiaSimulator
 {
@@ -16,11 +16,12 @@ namespace MafiaSimulator
 
         public static void DisplayPlayerStats(ConsoleColor aColor)
         {
+            var tempPlayer = DataManager.FetchMyContent<Player>(0);
             ConsoleWriteLine("======================================", aColor);
-            ConsoleWriteLine($" Name        : {(DataManager.myContent[typeof(Player)][0] as Player).AccessName}", aColor);
-            ConsoleWriteLine($" Score       : {(DataManager.myContent[typeof(Player)][0] as Player).GetScore}", aColor);
-            ConsoleWriteLine($" Money       : {(DataManager.myContent[typeof(Player)][0] as Player).GetMoney}", aColor);
-            ConsoleWriteLine($" Popularity  : {(DataManager.myContent[typeof(Player)][0] as Player).GetPopularity}", aColor);
+            ConsoleWriteLine($" Name        : {tempPlayer.MyName}", aColor);
+            ConsoleWriteLine($" Score       : {tempPlayer.MyScore}", aColor);
+            ConsoleWriteLine($" Money       : {tempPlayer.MyMoney}", aColor);
+            ConsoleWriteLine($" Popularity  : {tempPlayer.MyPopularity}", aColor);
             ConsoleWriteLine("======================================", aColor);
         }
         

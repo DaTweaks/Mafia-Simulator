@@ -1,25 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using MafiaSimulator.Data;
 
-namespace MafiaSimulator.Utils
+namespace MafiaSimulator.Data
 {
     public abstract class DataHolder
     {
-        protected string myFileName;
+        protected string MyFileName;
         
-        protected DataHolder(string aFileName)
-        {
-            myFileName = aFileName;
-        }
+        protected DataHolder(string aFileName) => MyFileName = aFileName;
 
         public virtual void Write() {}
 
         protected Dictionary<string, string> GetVariables()
         {
-            var tempLines = File.ReadAllLines(myFileName);
+            var tempLines = File.ReadAllLines(MyFileName);
             Dictionary<string, string> tempVariables = new Dictionary<string, string>();
             
             for (int i = 0; i < tempLines.Length; i++)
@@ -49,14 +44,14 @@ namespace MafiaSimulator.Utils
         protected int ConvertToIntParameter(string aVariable, string aKey)
         {
             if (!int.TryParse(aVariable, out var tempConverted))
-                ConvertFailed(aKey, myFileName);
+                ConvertFailed(aKey, MyFileName);
             return tempConverted;
         }
 
         protected string IsCorrectCheck(string aVariable, string aKey)
         {
             if (string.IsNullOrEmpty(aVariable))
-                ConvertFailed(aKey, myFileName);
+                ConvertFailed(aKey, MyFileName);
             return aVariable;
         }
         

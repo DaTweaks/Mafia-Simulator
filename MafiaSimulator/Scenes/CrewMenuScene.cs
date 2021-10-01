@@ -1,4 +1,4 @@
-﻿namespace MafiaSimulator
+﻿namespace MafiaSimulator.Scenes
 {
     public class CrewMenuScene : SceneHolder
     {

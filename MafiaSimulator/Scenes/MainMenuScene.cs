@@ -1,7 +1,8 @@
 ﻿using System;
-using MafiaSimulator.Utils; // i do as rider commands.
 
-namespace MafiaSimulator
+// i do as rider commands.
+
+namespace MafiaSimulator.Scenes
 {
     public class MainMenuScene : SceneHolder
     {
