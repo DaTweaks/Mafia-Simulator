@@ -9,12 +9,14 @@ namespace MafiaSimulator
         public override void Start()
         {
             Console.Clear();
-            if ((DataManager.myContent[typeof(Player)][0] as Player).GetScore > (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessScore)
+            var tempHighscore = DataManager.FetchMyContent<Highscore>(0);
+            var tempPlayer = DataManager.FetchMyContent<Player>(0);
+            if (tempPlayer.GetScore > tempHighscore.AccessScore)
             {
-                (DataManager.myContent[typeof(Highscore)][0] as Highscore).Write();
-                (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessName = (DataManager.myContent[typeof(Player)][0] as Player).AccessName;
-                (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessScore = (DataManager.myContent[typeof(Player)][0] as Player).GetScore;
-                (DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
+                tempHighscore.Write();
+                tempHighscore.AccessName = tempPlayer.AccessName;
+                tempHighscore.AccessScore = tempPlayer.GetScore;
+                tempHighscore.AccessDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
             }
             DataManager.FetchFolderData("PlayerStartingValues",typeof(Player));
             Program.ConsoleWriteContinue("You lost!",ConsoleColor.Red,ConsoleColor.Red);

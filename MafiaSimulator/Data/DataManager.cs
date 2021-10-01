@@ -11,6 +11,8 @@ namespace MafiaSimulator.Utils
     {
         public static Dictionary<Type, List<object>> myContent = new Dictionary<Type, List<object>>();
 
+        public static T FetchMyContent<T>(int myPosition) where T : class => myContent[typeof(T)][myPosition] as T; // i do as rider commands
+        
         public static void FetchData()
         {
             FetchFolderData("Banks",typeof(Bank));

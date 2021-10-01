@@ -11,56 +11,9 @@ namespace MafiaSimulator
         {
             DataManager.FetchData();
             Console.ForegroundColor = ConsoleColor.Cyan;
-            StartMenu();
+            SceneManager.LoadScene<StartMenu>();
         }
 
-        public static void StartMenu()
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.Clear();
-                    ConsoleWriteLine(@"
-=======================================================================================================================================
- /$$      /$$            /$$$$$$  /$$                  /$$$$$$  /$$                         /$$             /$$                        
-| $$$    /$$$           /$$__  $$|__/                 /$$__  $$|__/                        | $$            | $$                        
-| $$$$  /$$$$  /$$$$$$ | $$  \__/ /$$  /$$$$$$       | $$  \__/ /$$ /$$$$$$/$$$$  /$$   /$$| $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ 
-| $$ $$/$$ $$ |____  $$| $$$$    | $$ |____  $$      |  $$$$$$ | $$| $$_  $$_  $$| $$  | $$| $$ |____  $$|_  $$_/   /$$__  $$ /$$__  $$
-| $$\  $ | $$ /$$__  $$| $$      | $$ /$$__  $$       /$$  \ $$| $$| $$ | $$ | $$| $$  | $$| $$ /$$__  $$  | $$ /$$| $$  | $$| $$      
-| $$ \/  | $$|  $$$$$$$| $$      | $$|  $$$$$$$      |  $$$$$$/| $$| $$ | $$ | $$|  $$$$$$/| $$|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
-|__/     |__/ \_______/|__/      |__/ \_______/       \______/ |__/|__/ |__/ |__/ \______/ |__/ \_______/   \___/   \______/ |__/      
-=======================================================================================================================================");
-                    ConsoleWriteLine($@"
-Current Highscore
-   Score: {(DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessScore}
-    Name: {(DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessName}
-    Date: {(DataManager.myContent[typeof(Highscore)][0] as Highscore).AccessDate}");
-                    ConsoleWriteLine(@"
-1 : Start the game!
-2 : Exit The game!
-", ConsoleColor.Cyan, true);
-                    switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
-                    {
-                        case 1:
-                            ConsoleWriteContinue("Starting the game!");
-                            SceneManager.LoadScene(typeof(SetupScene));
-                            break;
-                        case 2:
-                            ConsoleWriteLine("Now Exiting!", ConsoleColor.Red, true);
-                            Environment.Exit(0);
-                            break;
-                        default:
-                            throw new Exception("This isn't a valid number!");
-                    }
-                }
-                catch (Exception e)
-                {
-                    ConsoleWriteContinue(e.ToString(), ConsoleColor.Red, ConsoleColor.Red);
-                }
-            }
-        }
-        
         public static void DisplayPlayerStats(ConsoleColor aColor)
         {
             ConsoleWriteLine("======================================", aColor);

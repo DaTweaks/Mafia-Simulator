@@ -16,8 +16,8 @@ namespace MafiaSimulator
                     string aName = Console.ReadLine();
                     if (aName.Length <= 0 || aName.Length > 15)
                         throw new Exception($"The Name is too {(aName.Length <= 0 ? "Short" : "Long")}!");
-                    (DataManager.myContent[typeof(Player)][0] as Player).AccessName = aName;
-                    SceneManager.LoadScene(typeof(MainMenuScene));
+                    DataManager.FetchMyContent<Player>(0).AccessName = aName;
+                    SceneManager.LoadScene<MainMenuScene>();
                 }
                 catch (Exception e)
                 {

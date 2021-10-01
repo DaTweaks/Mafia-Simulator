@@ -21,8 +21,8 @@ namespace MafiaSimulator.Data
         {
             var tempArray = File.ReadAllLines(myFileName);
 
-            myName = (DataManager.myContent[typeof(Player)][0] as Player).AccessName;
-            myScore = (DataManager.myContent[typeof(Player)][0] as Player).GetScore;
+            myName = DataManager.FetchMyContent<Player>(0).AccessName;
+            myScore = DataManager.FetchMyContent<Player>(0).GetScore;
             myDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
 
             tempArray[0] = EditLine(tempArray[0], myName);

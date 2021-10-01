@@ -24,23 +24,23 @@ namespace MafiaSimulator
                     {
                         case 1:
                             Program.ConsoleWriteContinue("Now Planning to Heist a Bank!");
-                            SceneManager.LoadScene(typeof(BankScene));
+                            SceneManager.LoadScene<BankScene>();
                             break;
                         case 2:
                             Program.ConsoleWriteContinue("Going to your warehouse!");
-                            SceneManager.LoadScene(typeof(WareHouseScene));
+                            SceneManager.LoadScene<WareHouseScene>();
                             break;
                         case 3:
                             Program.ConsoleWriteContinue("Finding new crew members!");
-                            SceneManager.LoadScene(typeof(RecruitmentScene));
+                            SceneManager.LoadScene<RecruitmentScene>();
                             break;
                         case 4:
                             Program.ConsoleWriteContinue("Calling your Crew members!");
-                            SceneManager.LoadScene(typeof(CrewMenuScene));
+                            SceneManager.LoadScene<CrewMenuScene>();
                             break;
                         case 5:
                             Program.ConsoleWriteContinue("You decided it's your time to go!");
-                            SceneManager.LoadScene(typeof(EndingScene));
+                            SceneManager.LoadScene<EndingScene>();
                             break;
                         default:
                             throw new Exception("This isn't a valid number!");
@@ -51,7 +51,6 @@ namespace MafiaSimulator
                     Program.ConsoleWriteContinue(e.ToString(), ConsoleColor.Red, ConsoleColor.Red);
                     continue;
                 }
-
                 break;
             }
         }

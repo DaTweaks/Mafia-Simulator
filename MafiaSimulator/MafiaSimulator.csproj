@@ -56,6 +56,7 @@
         <Compile Include="Scenes\SceneHolder.cs" />
         <Compile Include="Scenes\SceneManager.cs" />
         <Compile Include="Scenes\SetupScene.cs" />
+        <Compile Include="Scenes\StartMenu.cs" />
         <Compile Include="Scenes\WareHouseScene.cs" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
