@@ -10,9 +10,9 @@ namespace MafiaSimulator.Scenes
         {
             while (true)
             {
-                Console.Clear();
                 try
                 {
+                    Console.Clear();
                     Program.DisplayPlayerStats(ConsoleColor.Blue);
                     Program.ConsoleWriteLine(@"
 1 : Heist a Bank!

@@ -9,9 +9,9 @@ namespace MafiaSimulator.Scenes
         {
             while (true)
             {
-                Console.Clear();
                 try
                 {
+                    Console.Clear();
                     Program.ConsoleWriteLine("Input your Name!");
                     string aName = Console.ReadLine();
                     if (string.IsNullOrEmpty(aName) || aName.Length <= 0 || aName.Length > 15)

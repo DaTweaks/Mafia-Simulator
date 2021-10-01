@@ -7,7 +7,6 @@ namespace MafiaSimulator.Scenes
     {
         public override void Start()
         {
-            Console.Clear();
             var tempHighScore = DataManager.FetchMyContent<HighScore>(0);
             var tempPlayer = DataManager.FetchMyContent<Player>(0);
             if (tempPlayer.MyScore > tempHighScore.MyScore)
@@ -17,7 +16,7 @@ namespace MafiaSimulator.Scenes
                 tempHighScore.MyScore = tempPlayer.MyScore;
                 tempHighScore.MyDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
             }
-            DataManager.FetchFolderData<Player>("PlayerStartingValues");
+            DataManager.FetchData();
             Program.ConsoleWriteContinue("You lost!",ConsoleColor.Red,ConsoleColor.Red);
             SceneManager.LoadScene<StartMenu>();
         }

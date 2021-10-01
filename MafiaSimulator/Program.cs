@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Media;
 using System.Net.Security;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -35,7 +36,7 @@ namespace MafiaSimulator
             ConsoleWriteLine($" Score       : {tempPlayer.MyScore}", aColor);
             ConsoleWriteLine($" Money       : {tempPlayer.MyMoney}", aColor);
             ConsoleWriteLine($" Popularity  : {tempPlayer.MyPopularity}", aColor);
-            ConsoleWriteLine($"   : {tempPlayer.MyDiscovered}", aColor);
+            ConsoleWriteLine($" Discovered  : {tempPlayer.MyDiscovered.Item1} / {tempPlayer.MyDiscovered.Item2}", aColor);
             ConsoleWriteLine("======================================", aColor);
         }
         

@@ -1,8 +1,8 @@
 NAME: Jebediah Kerman 		# Can't be empty
-COST: 1000000			# > 0, cost to buy that crew member
+COST: 10			# > 0, cost to buy that crew member
 LOYALTY: 690 			# > 0, the chance of the crew member to refuse a heist and leave you)
 OFFENSE: 420			# > 0, The starting offense of the crew member)
 DEFENSE: 1			# > 0, The starting defense of the crew member)
 SKILL: 100 			# > 0, the skill of the crew member)
 COVERT: 1 			# > 0, how covert the crew member is. this lowers the chance of the police finding you)
-POPULARITY: 4000 		# > 0, the amount of popularity needed to unlock)
+POPULARITY: 0	 		# > 0, the amount of popularity needed to unlock)

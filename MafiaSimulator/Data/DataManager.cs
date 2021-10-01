@@ -6,7 +6,7 @@ namespace MafiaSimulator.Data
 {
     public static class DataManager
     {
-        private static Dictionary<Type, List<object>> MyContent = new Dictionary<Type, List<object>>();
+        public static Dictionary<Type, List<object>> MyContent = new Dictionary<Type, List<object>>();
         
         public static void FetchData()
         {
@@ -45,6 +45,18 @@ namespace MafiaSimulator.Data
         }
 
         public static T FetchMyContent<T>(int myPosition) where T : class => MyContent[typeof(T)][myPosition] as T;
+
+        public static List<T> FetchMyContentList<T>() where T : class
+        {
+            List<T> tempClassList = new List<T>();
+
+            var tempObjectList = MyContent[typeof(T)];
+            
+            for (int i = 0; i < tempObjectList.Count; i++)
+                tempClassList.Add(tempObjectList[i] as T);
+            
+            return tempClassList;
+        }
 
         private static string[] GetFiles(string aPath) => Directory.GetFiles(Path.GetFullPath($"GameData/{aPath}"));
     }

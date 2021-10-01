@@ -7,6 +7,7 @@ namespace MafiaSimulator.Scenes
     {
         public static void LoadScene<T>()
         {
+            Console.Clear();
             Type tempType = typeof(T);
             if (tempType.IsAssignableFrom(typeof(SceneHolder)))
             {
