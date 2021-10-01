@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Net.Security;
+using System.Runtime.InteropServices;
 using System.Threading;
 using MafiaSimulator.Data;
 using MafiaSimulator.Scenes;
@@ -11,10 +14,20 @@ namespace MafiaSimulator
         {
             DataManager.FetchData();
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Fullscreen();
             SceneManager.LoadScene<StartMenu>();
         }
-
-        public static void DisplayPlayerStats(ConsoleColor aColor)
+        
+        private static void Fullscreen()
+        {
+            var tempProcess = Process.GetCurrentProcess();
+            ShowWindow(tempProcess.MainWindowHandle, 3);
+        }
+        
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int cmdShow);
+        
+        public static void DisplayPlayerStats(ConsoleColor aColor = ConsoleColor.Cyan)
         {
             var tempPlayer = DataManager.FetchMyContent<Player>(0);
             ConsoleWriteLine("======================================", aColor);
@@ -22,6 +35,7 @@ namespace MafiaSimulator
             ConsoleWriteLine($" Score       : {tempPlayer.MyScore}", aColor);
             ConsoleWriteLine($" Money       : {tempPlayer.MyMoney}", aColor);
             ConsoleWriteLine($" Popularity  : {tempPlayer.MyPopularity}", aColor);
+            ConsoleWriteLine($"   : {tempPlayer.MyDiscovered}", aColor);
             ConsoleWriteLine("======================================", aColor);
         }
         

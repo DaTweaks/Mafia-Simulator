@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MafiaSimulator.Data
 {
@@ -12,6 +13,8 @@ namespace MafiaSimulator.Data
 
         public int MyPopularity;
 
+        public Tuple<int,int> MyDiscovered;
+
         public List<Crew> MyCrew = new List<Crew>();
 
         public List<Item> MyItems = new List<Item>();
@@ -24,6 +27,7 @@ namespace MafiaSimulator.Data
 
             MyName = "";
             MyScore = 0;
+            MyDiscovered = new Tuple<int, int>(0,ConvertToIntParameter(tempVariables["maxdiscovered"], "maxdiscovered"));
             MyMoney = ConvertToIntParameter(tempVariables["money"], "money");
             MyPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }

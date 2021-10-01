@@ -49,10 +49,8 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.ToString(), ConsoleColor.Red, ConsoleColor.Red);
-                    continue;
+                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
                 }
-                break;
             }
         }
     }

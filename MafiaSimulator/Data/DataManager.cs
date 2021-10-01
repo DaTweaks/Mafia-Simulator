@@ -19,7 +19,7 @@ namespace MafiaSimulator.Data
 
         public static void FetchFolderData<T>(string aPath)
         {
-            Type aClassType = typeof(T);
+            var aClassType = typeof(T);
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {
                 Console.WriteLine("the Class doesn't have the DataHolder extension.");

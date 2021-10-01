@@ -1,2 +1,3 @@
 MONEY: 10000		# Starting money (must be higher than 0)
-popularity: 10		# Starting Popularity (must be higher than 0)
+POPULARITY: 10		# Starting Popularity (must be higher than 0)
+MAXDISCOVERED: 10	# The maximum value that the discovered meter can be (must be higher than 0)

@@ -12,8 +12,7 @@ namespace MafiaSimulator.Scenes
                 try
                 {
                     Console.Clear();
-                    Program.ConsoleWriteLine(@"
-=======================================================================================================================================
+                    Program.ConsoleWriteLine(@"=======================================================================================================================================
  /$$      /$$            /$$$$$$  /$$                  /$$$$$$  /$$                         /$$             /$$                        
 | $$$    /$$$           /$$__  $$|__/                 /$$__  $$|__/                        | $$            | $$                        
 | $$$$  /$$$$  /$$$$$$ | $$  \__/ /$$  /$$$$$$       | $$  \__/ /$$ /$$$$$$/$$$$  /$$   /$$| $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ 
@@ -47,7 +46,7 @@ Current HighScore
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.ToString(), ConsoleColor.Red, ConsoleColor.Red);
+                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
                 }
             }
         }

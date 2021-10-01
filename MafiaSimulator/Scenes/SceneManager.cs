@@ -1,4 +1,5 @@
 ﻿using System;
+using MafiaSimulator.Data;
 
 namespace MafiaSimulator.Scenes
 {
@@ -13,8 +14,19 @@ namespace MafiaSimulator.Scenes
                 Environment.Exit(0);
             }
 
+            if (tempType != typeof(EndingScene) && CheckPlayerStats())
+                LoadScene<EndingScene>();
+            
+            
             var tempObj = Activator.CreateInstance(tempType);
             (tempObj as SceneHolder)?.Start();
+        }
+        
+        /// <returns>returns true if the player is dead.</returns>
+        private static bool CheckPlayerStats()
+        {
+            var tempPlayer = DataManager.FetchMyContent<Player>(0);
+            return tempPlayer.MyMoney <= 0 || tempPlayer.MyDiscovered.Item1 >= tempPlayer.MyDiscovered.Item2;
         }
     }
 }
