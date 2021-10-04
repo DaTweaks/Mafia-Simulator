@@ -4,26 +4,26 @@ namespace MafiaSimulator.Data
 {
     public class Crew : DataHolder
     {
-        private string MyName;
-        public string GetName => MyName;
+        private string myName;
+        public string GetName => myName;
 
-        private int MyCost;
-        public int GetCost => MyCost;
+        private int myCost;
+        public int GetCost => myCost;
 
-        private int MyLoyalty;
-        public int GetLoyalty => MyLoyalty;
+        private int myLoyalty;
+        public int GetLoyalty => myLoyalty;
 
-        private int MyOffense;
-        public int GetOffense => MyOffense;
+        private int myOffense;
+        public int GetOffense => myOffense;
 
-        private int MyDefense;
-        public int GetDefense => MyDefense;
+        private int myDefense;
+        public int GetDefense => myDefense;
         
-        private int MySkill;
-        public int GetSkill => MySkill;
+        private int mySkill;
+        public int GetSkill => mySkill;
         
-        private int MyCovert;
-        public int GetCovert => MyCovert;
+        private int myCovert;
+        public int GetCovert => myCovert;
         
         private int MyUnlockPopularity;
         public int GetUnlockPopularity => MyUnlockPopularity;
@@ -34,14 +34,13 @@ namespace MafiaSimulator.Data
         {
             var tempVariables = GetVariables();
             
-            MyName = IsCorrectCheck(tempVariables["name"],"name");
-            Program.ConsoleWriteLine(MyName, ConsoleColor.Green);
-            MyCost = ConvertToIntParameter(tempVariables["cost"], "cost");
-            MyLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
-            MyOffense = ConvertToIntParameter(tempVariables["offense"], "offense");
-            MyDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
-            MySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
-            MyCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
+            myName = IsCorrectCheck(tempVariables["name"],"name");
+            myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
+            myLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
+            myOffense = ConvertToIntParameter(tempVariables["offense"], "offense");
+            myDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
+            mySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
+            myCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
             MyUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }
     }

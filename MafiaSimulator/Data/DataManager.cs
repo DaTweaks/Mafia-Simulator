@@ -10,6 +10,7 @@ namespace MafiaSimulator.Data
         
         public static void FetchData()
         {
+            MyContent.Clear();
             FetchFolderData<Bank>("Banks");
             FetchFolderData<Item>("Items");
             FetchFolderData<Crew>("Crew");
@@ -17,7 +18,7 @@ namespace MafiaSimulator.Data
             FetchFolderData<Player>("PlayerStartingValues");
         }
 
-        public static void FetchFolderData<T>(string aPath)
+        private static void FetchFolderData<T>(string aPath)
         {
             var aClassType = typeof(T);
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
@@ -44,9 +45,9 @@ namespace MafiaSimulator.Data
             }
         }
 
-        public static T FetchMyContent<T>(int myPosition) where T : class => MyContent[typeof(T)][myPosition] as T;
+        public static T FetchMyContent<T>(int myPosition) where T : DataHolder => MyContent[typeof(T)][myPosition] as T;
 
-        public static List<T> FetchMyContentList<T>() where T : class
+        public static List<T> FetchMyContentList<T>() where T : DataHolder
         {
             List<T> tempClassList = new List<T>();
 

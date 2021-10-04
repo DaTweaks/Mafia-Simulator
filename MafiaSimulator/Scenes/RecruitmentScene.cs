@@ -4,7 +4,7 @@ using MafiaSimulator.Data;
 
 namespace MafiaSimulator.Scenes
 {
-    public class RecruitmentScene : SceneHolder
+    public class RecruitmentScene : SceneHolder // *iT iS nEvEr InStAnSiAtEd* quiet rider. it is, but only through reflections
     {
         public override void Start()
         {
@@ -16,43 +16,43 @@ namespace MafiaSimulator.Scenes
                     var tempPlayer = DataManager.FetchMyContent<Player>(0);
                     var tempCrew = DataManager.FetchMyContentList<Crew>();
                     
-                    var tempAvaliableCrews = new List<Crew>();
+                    var tempAvailableCrews = new List<Crew>();
                     
-                    for (int i = 0; i < tempCrew.Count; i++)
+                    for (var i = 0; i < tempCrew.Count; i++)
                         if(tempCrew[i].GetUnlockPopularity <= tempPlayer.MyPopularity)
-                            tempAvaliableCrews.Add(tempCrew[i]);
+                            tempAvailableCrews.Add(tempCrew[i]);
                     
                     Program.DisplayPlayerStats();
-                    int lastdigit = 0;
-                    for (int i = 0; i < tempAvaliableCrews.Count; i++)
+                    var aLastDigit = 0;
+                    for (var i = 0; i < tempAvailableCrews.Count; i++)
                     {
-                        lastdigit++;
-                        Program.ConsoleWriteLine($"{i} : {tempAvaliableCrews[i].GetName}      Cost: {tempAvaliableCrews[i].GetCost}");
+                        aLastDigit++;
+                        Program.ConsoleWriteLine($"{i} : {tempAvailableCrews[i].GetName}      Cost: {tempAvailableCrews[i].GetCost}");
                     }
-                    if(tempAvaliableCrews.Count == 0)
+                    if(tempAvailableCrews.Count == 0)
                         Program.ConsoleWriteLine($"it's so empty in here!");
                     
-                    Program.ConsoleWriteLine($"{lastdigit} : Go back to previous menu");
+                    Program.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
                     Program.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
                     
                     var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
-                    if (tempInput == lastdigit || lastdigit == 0)
+                    if (tempInput == aLastDigit || aLastDigit == 0)
                     {
                         Program.ConsoleWriteContinue("Returning to last menu!");
                         return;
                     }
                     
-                    if (lastdigit < tempInput || tempInput < 0)
+                    if (aLastDigit < tempInput || tempInput < 0)
                         throw new Exception("This isn't a valid number!");
                     
-                    if (DisplayCrewInfo(tempAvaliableCrews[tempInput], tempPlayer))
+                    if (DisplayCrewInfo(tempAvailableCrews[tempInput], tempPlayer))
                     {
-                        tempPlayer.MyMoney -= tempAvaliableCrews[tempInput].GetCost;
-                        tempPlayer.MyCrew.Add(tempAvaliableCrews[tempInput]);
+                        tempPlayer.MyMoney -= tempAvailableCrews[tempInput].GetCost;
+                        tempPlayer.MyCrew.Add(tempAvailableCrews[tempInput]);
 
-                        for (int i = 0; i < tempCrew.Count; i++)
-                            if (tempCrew[i] == tempAvaliableCrews[tempInput])
+                        for (var i = 0; i < tempCrew.Count; i++)
+                            if (tempCrew[i] == tempAvailableCrews[tempInput])
                                 DataManager.MyContent[typeof(Crew)].RemoveAt(i);
                     }
                 }

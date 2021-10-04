@@ -19,8 +19,8 @@ namespace MafiaSimulator.Scenes
 2 : Check your Warehouse!
 3 : Find New Crew Members!
 4 : Check out your crew!
-4 : Go to the black market!
-5 : Kill yourself!", ConsoleColor.Cyan, true);
+5 : Go to the black market!
+6 : Kill yourself!", ConsoleColor.Cyan, true);
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
@@ -40,6 +40,10 @@ namespace MafiaSimulator.Scenes
                             SceneManager.LoadScene<CrewMenuScene>();
                             break;
                         case 5:
+                            Program.ConsoleWriteContinue("Going to the black market!");
+                            SceneManager.LoadScene<BlackmarketScene>();
+                            break;
+                        case 6:
                             Program.ConsoleWriteContinue("You decided it's your time to go!");
                             SceneManager.LoadScene<EndingScene>();
                             break;

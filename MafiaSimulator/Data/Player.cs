@@ -24,9 +24,7 @@ namespace MafiaSimulator.Data
         public override void Load()
         {
             var tempVariables = GetVariables();
-
-            MyName = "";
-            MyScore = 0;
+            
             MyDiscovered = new Tuple<int, int>(0,ConvertToIntParameter(tempVariables["maxdiscovered"], "maxdiscovered"));
             MyMoney = ConvertToIntParameter(tempVariables["money"], "money");
             MyPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");

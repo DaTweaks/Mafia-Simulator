@@ -27,7 +27,9 @@ namespace MafiaSimulator.Scenes
         private static bool CheckPlayerStats()
         {
             var tempPlayer = DataManager.FetchMyContent<Player>(0);
-            return tempPlayer.MyMoney <= 0 || tempPlayer.MyDiscovered.Item1 >= tempPlayer.MyDiscovered.Item2;
+            return 
+                tempPlayer.MyMoney <= 0 
+                || tempPlayer.MyDiscovered.Item1 >= tempPlayer.MyDiscovered.Item2;
         }
     }
 }

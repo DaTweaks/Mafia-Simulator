@@ -9,12 +9,12 @@ namespace MafiaSimulator.Scenes
         {
             var tempHighScore = DataManager.FetchMyContent<HighScore>(0);
             var tempPlayer = DataManager.FetchMyContent<Player>(0);
-            if (tempPlayer.MyScore > tempHighScore.MyScore)
+            if (tempPlayer.MyScore > tempHighScore.myScore)
             {
                 tempHighScore.Write();
-                tempHighScore.MyName = tempPlayer.MyName;
-                tempHighScore.MyScore = tempPlayer.MyScore;
-                tempHighScore.MyDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
+                tempHighScore.myName = tempPlayer.MyName;
+                tempHighScore.myScore = tempPlayer.MyScore;
+                tempHighScore.myDate = DateTime.Today.ToString().Replace(" 00:00:00", "");
             }
             DataManager.FetchData();
             Program.ConsoleWriteContinue("You lost!",ConsoleColor.Red,ConsoleColor.Red);

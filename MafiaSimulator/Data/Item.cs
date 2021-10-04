@@ -4,14 +4,14 @@ namespace MafiaSimulator.Data
 {
     public class Item : DataHolder
     {
-        private string MyName; 
-        public string GetName => MyName;
+        private string myName; 
+        public string GetName => myName;
 
-        private int MyType;
-        public int GetType => MyType;
+        private int myType;
+        public int GetType => myType;
 
-        private int MyLevel;
-        public int GetLevel => MyLevel;
+        private int myLevel;
+        public int GetLevel => myLevel;
 
         public Item(string aFileName) : base(aFileName) { } 
         
@@ -19,10 +19,9 @@ namespace MafiaSimulator.Data
         {
             var tempVariables = GetVariables();
             
-            MyName = IsCorrectCheck(tempVariables["name"],"name");
-            Program.ConsoleWriteLine(MyName, ConsoleColor.Green);
-            MyType = ConvertToIntParameter(tempVariables["type"], "type");
-            MyLevel = ConvertToIntParameter(tempVariables["level"], "level");
+            myName = IsCorrectCheck(tempVariables["name"],"name");
+            myType = ConvertToIntParameter(tempVariables["type"], "type");
+            myLevel = ConvertToIntParameter(tempVariables["level"], "level");
         }
     }
 }

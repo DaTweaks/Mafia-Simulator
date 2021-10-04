@@ -24,9 +24,9 @@ namespace MafiaSimulator.Scenes
                     var tempHighscore = DataManager.FetchMyContent<HighScore>(0);
                     Program.ConsoleWriteLine($@"
 Current HighScore
-   Score: {tempHighscore.MyScore}
-    Name: {tempHighscore.MyName}
-    Date: {tempHighscore.MyDate}");
+   Score: {tempHighscore.myScore}
+    Name: {tempHighscore.myName}
+    Date: {tempHighscore.myDate}");
                     Program.ConsoleWriteLine(@"
 1 : Start the game!
 2 : Exit The game!", ConsoleColor.Cyan, true);
