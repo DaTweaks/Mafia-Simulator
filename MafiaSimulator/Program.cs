@@ -56,5 +56,10 @@ namespace MafiaSimulator
                 ConsoleWriteLine(aMessage, aMessageColor);
             ConsoleWriteLine("Press any key to continue!", aContinueColor, true);
         }
+
+        public static void ConsoleWriteSpacer(ConsoleColor aColor = ConsoleColor.Cyan)
+        {
+            ConsoleWriteLine("======================================", aColor);
+        }
     }
 }

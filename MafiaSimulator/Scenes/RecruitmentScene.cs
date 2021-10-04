@@ -71,14 +71,7 @@ namespace MafiaSimulator.Scenes
                 {
                     Console.Clear();
                     Program.DisplayPlayerStats();
-                    Program.ConsoleWriteLine($"==================================");
-                    Program.ConsoleWriteLine($"Name     : {aCrew.GetName}");
-                    Program.ConsoleWriteLine($"Offense  : {aCrew.GetOffense}");
-                    Program.ConsoleWriteLine($"Defense  : {aCrew.GetDefense}");
-                    Program.ConsoleWriteLine($"Covert   : {aCrew.GetCovert}");
-                    Program.ConsoleWriteLine($"Skill    : {aCrew.GetSkill}");
-                    Program.ConsoleWriteLine($"Cost     : {aCrew.GetCost}");
-                    Program.ConsoleWriteLine($"==================================");
+                    aCrew.ShowStats(true);
                     Program.ConsoleWriteLine($"1 : Recruit him");
                     Program.ConsoleWriteLine($"2 : Go back to previous menu");
                     

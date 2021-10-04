@@ -20,7 +20,7 @@ namespace MafiaSimulator.Data
         public List<Item> MyItems = new List<Item>();
         
         public Player(string aFileName) : base(aFileName) { }
-        
+
         public override void Load()
         {
             var tempVariables = GetVariables();

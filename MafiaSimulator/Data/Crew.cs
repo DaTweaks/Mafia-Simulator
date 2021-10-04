@@ -25,10 +25,35 @@ namespace MafiaSimulator.Data
         private int myCovert;
         public int GetCovert => myCovert;
         
-        private int MyUnlockPopularity;
-        public int GetUnlockPopularity => MyUnlockPopularity;
+        private int myUnlockPopularity;
+        public int GetUnlockPopularity => myUnlockPopularity;
+        
+        private Item myWeapon;
+        public Item AccessWeapon { get => myWeapon; set => myWeapon = value; }
+        
+        private Item myArmour;
+        public Item AccessArmour { get => myArmour; set => myArmour = value; }
+        
 
-        public Crew(string aFileName) : base(aFileName) { } 
+        public Crew(string aFileName) : base(aFileName) { }
+
+        public void ShowStats(bool tempShowItems = false, bool tempShowCost = true)
+        {
+            Program.ConsoleWriteLine($"==================================");
+            Program.ConsoleWriteLine($"Name     : {myName}");
+            Program.ConsoleWriteLine($"Offense  : {myOffense}");
+            Program.ConsoleWriteLine($"Defense  : {myDefense}");
+            Program.ConsoleWriteLine($"Covert   : {myCovert}");
+            Program.ConsoleWriteLine($"Skill    : {mySkill}");
+            if (tempShowItems)
+            {
+                Program.ConsoleWriteLine($"Weapon   : {(myWeapon == null ? "Empty" : myWeapon.GetName)}");
+                Program.ConsoleWriteLine($"Armour   : {(myArmour == null ? "Empty" : myArmour.GetName)}");
+            }
+            if(tempShowCost)
+                Program.ConsoleWriteLine($"Cost     : {myCost}");
+            Program.ConsoleWriteLine($"==================================");
+        }
         
         public override void Load()
         {
@@ -41,7 +66,7 @@ namespace MafiaSimulator.Data
             myDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
             mySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
             myCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
-            MyUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
         }
     }
 }
