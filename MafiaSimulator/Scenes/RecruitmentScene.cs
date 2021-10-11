@@ -24,11 +24,9 @@ namespace MafiaSimulator.Scenes
                     
                     Program.DisplayPlayerStats();
                     var aLastDigit = 0;
-                    for (var i = 0; i < tempAvailableCrews.Count; i++)
-                    {
-                        aLastDigit++;
+                    for (var i = 0; i < tempAvailableCrews.Count; i++, aLastDigit++)
                         Program.ConsoleWriteLine($"{i} : {tempAvailableCrews[i].GetName}      Cost: {tempAvailableCrews[i].GetCost}");
-                    }
+                    
                     if(tempAvailableCrews.Count == 0)
                         Program.ConsoleWriteLine($"it's so empty in here!");
                     

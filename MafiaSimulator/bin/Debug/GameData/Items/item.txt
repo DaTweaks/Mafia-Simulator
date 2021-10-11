@@ -1,3 +1,5 @@
 NAME: Jeb's Ballistic Missile 		# can't be empty
 TYPE: 0					# 0 is Weapon, 1 is Armour
 LEVEL: 100				# > 0, the level of the item
+COST: 1000				# > 0, the cost of the item
+SELLCOST: 500				# > 0, how much the item will sell for

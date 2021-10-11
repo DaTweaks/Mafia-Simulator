@@ -19,9 +19,8 @@ namespace MafiaSimulator.Scenes
 
                     Program.DisplayPlayerStats();
                     var aLastDigit = 0;
-                    for (var i = 0; i < tempCrew.Count; i++)
+                    for (var i = 0; i < tempCrew.Count; i++, aLastDigit++)
                     {
-                        aLastDigit++;
                         Program.ConsoleWriteLine(
                             $"{i} : {tempCrew[i].GetName}      Cost: {tempCrew[i].GetCost}");
                     }
@@ -85,6 +84,7 @@ namespace MafiaSimulator.Scenes
                 }
             }
         }
+        
         private void EditInventory(Crew aCrew, Player aPlayer)
         {
             while (true)
@@ -124,12 +124,9 @@ namespace MafiaSimulator.Scenes
         private int ShowItems(List<Item> tempItems)
         {
             var aLastDigit = 0;
-            for (var i = 0; i < tempItems.Count; i++)
-            {
-                aLastDigit++;
+            for (var i = 0; i < tempItems.Count; i++, aLastDigit++)
                 Program.ConsoleWriteLine($"{i} : {tempItems[i].GetName}      Level: {tempItems[i].GetLevel}     Type: {(tempItems[i].GetType == 0 ? "Weapon" : "Armour" )}");
-            }
-
+            
             return aLastDigit;
         }
 
