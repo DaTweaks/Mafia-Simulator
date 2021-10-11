@@ -31,9 +31,7 @@ namespace MafiaSimulator.Scenes
                     Program.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
                     Program.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
 
-                    var tempInput = int.TryParse(Console.ReadLine(), out var temp)
-                        ? temp
-                        : throw new Exception("This isn't a Number!");
+                    var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
                     if (tempInput == aLastDigit || aLastDigit == 0)
                     {
@@ -54,38 +52,6 @@ namespace MafiaSimulator.Scenes
         }
 
         private void DisplayCrewInfo(Crew aCrew, Player aPlayer)
-        {
-            while (true)
-            {
-                try
-                {
-                    Console.Clear();
-                    Program.DisplayPlayerStats();
-                    aCrew.ShowStats(true, false);
-                    Program.ConsoleWriteLine($"1 : Add/Remove Items from inventory");
-                    Program.ConsoleWriteLine($"2 : Go back to previous menu");
-                    switch (int.TryParse(Console.ReadLine(), out var temp)
-                        ? temp
-                        : throw new Exception("This isn't a Number!"))
-                    {
-                        case 1:
-                            EditInventory(aCrew, aPlayer);
-                            break;
-                        case 2:
-                            Program.ConsoleWriteContinue("You go to the previous menu!");
-                            return;
-                        default:
-                            throw new Exception("This isn't a valid number!");
-                    }
-                }
-                catch (Exception e)
-                {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
-                }
-            }
-        }
-        
-        private void EditInventory(Crew aCrew, Player aPlayer)
         {
             while (true)
             {

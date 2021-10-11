@@ -13,6 +13,9 @@ namespace MafiaSimulator.Data
         private int myLevel;
         public int GetLevel => myLevel;
         
+        private int myUnlockPopularity;
+        public int GetUnlockPopularity => myUnlockPopularity;
+        
         private int myCost;
         public int GetCost => myCost;
         
@@ -39,7 +42,8 @@ namespace MafiaSimulator.Data
             
             myName = IsCorrectCheck(tempVariables["name"],"name");
             myType = ConvertToIntParameter(tempVariables["type"], "type");
-            myLevel = ConvertToIntParameter(tempVariables["level"], "level");   
+            myLevel = ConvertToIntParameter(tempVariables["level"], "level");
+            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
             myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
             mySellCost = ConvertToIntParameter(tempVariables["sellcost"], "sellcost");
         }
