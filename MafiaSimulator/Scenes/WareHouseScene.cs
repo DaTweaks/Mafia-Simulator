@@ -16,23 +16,23 @@ namespace MafiaSimulator.Scenes
                     
                     var aPlayer = DataManager.FetchMyContent<Player>(0);
 
-                    var tempItems = aPlayer.MyItems;
+                    var tempItems = aPlayer.Items;
 
-                    Program.DisplayPlayerStats();
+                    TextManager.DisplayPlayerStats();
                     var aLastDigit = 0;
                     for (var i = 0; i < tempItems.Count; i++, aLastDigit++)
-                        Program.ConsoleWriteLine($"{i} : {tempItems[i].GetName}      {(tempItems[i].GetType == 0 ? "Offense": "Defense")} : {tempItems[i].GetLevel}     SellCost : {tempItems[i].GetSellCost}");
+                        TextManager.ConsoleWriteLine($"{i} : {tempItems[i].GetName}      {(tempItems[i].GetType == 0 ? "Offense": "Defense")} : {tempItems[i].GetLevel}     SellCost : {tempItems[i].GetSellCost}");
                     if(tempItems.Count == 0)
-                        Program.ConsoleWriteLine($"it's so empty in here!");
+                        TextManager.ConsoleWriteLine($"it's so empty in here!");
                     
-                    Program.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
-                    Program.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
+                    TextManager.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
+                    TextManager.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
                     
                     var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
                     if (tempInput == aLastDigit || aLastDigit == 0)
                     {
-                        Program.ConsoleWriteContinue("Returning to last menu!");
+                        TextManager.ConsoleWriteContinue("Returning to last menu!");
                         return;
                     }
                     
@@ -43,7 +43,7 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 }
             }
         }
@@ -55,22 +55,22 @@ namespace MafiaSimulator.Scenes
                 try
                 {
                     Console.Clear();
-                    Program.DisplayPlayerStats();
+                    TextManager.DisplayPlayerStats();
                     aItem.ShowStats(true, false);
-                    Program.ConsoleWriteLine($"1 : Sell the item");
-                    Program.ConsoleWriteLine($"2 : Go back to previous menu");
+                    TextManager.ConsoleWriteLine($"1 : Sell the item");
+                    TextManager.ConsoleWriteLine($"2 : Go back to previous menu");
                     
                     switch (int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            var tempItems = aPlayer.MyItems;
-                            aPlayer.MyMoney += aItem.GetSellCost;
+                            var tempItems = aPlayer.Items;
+                            aPlayer.Money += aItem.GetSellCost;
                             for (var i = 0; i < tempItems.Count; i++)
                                 if(tempItems[i] == aItem)
                                     tempItems.RemoveAt(i);
                             return;
                         case 2:
-                            Program.ConsoleWriteContinue("You go to the previous menu!");
+                            TextManager.ConsoleWriteContinue("You go to the previous menu!");
                             return;
                         default:
                             throw new Exception("This isn't a valid number!");
@@ -78,7 +78,7 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 } 
             }
         }

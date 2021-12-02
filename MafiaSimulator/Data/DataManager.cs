@@ -24,7 +24,7 @@ namespace MafiaSimulator.Data
             if (aClassType.IsAssignableFrom(typeof(DataHolder)))
             {
                 Console.WriteLine("the Class doesn't have the DataHolder extension.");
-                Program.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red, true);
+                TextManager.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red, true);
                 Environment.Exit(0);
                 return;
             }

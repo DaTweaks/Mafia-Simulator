@@ -12,16 +12,16 @@ namespace MafiaSimulator.Scenes
                 try
                 {
                     Console.Clear();
-                    Program.ConsoleWriteLine("Input your Name!");
-                    string aName = Console.ReadLine();
-                    if (string.IsNullOrEmpty(aName) || aName.Length <= 0 || aName.Length > 15)
-                        throw new Exception($"The Name is too {(string.IsNullOrWhiteSpace(aName) || aName.Length <= 0 ? "Short" : "Long")}!");
-                    DataManager.FetchMyContent<Player>(0).MyName = aName;
+                    TextManager.ConsoleWriteLine("Input your Name!");
+                    var name = Console.ReadLine();
+                    if (string.IsNullOrEmpty(name) || name.Length <= 0 || name.Length > 15)
+                        throw new Exception($"The Name is too {(string.IsNullOrWhiteSpace(name) || name.Length <= 0 ? "Short" : "Long")}!");
+                    DataManager.FetchMyContent<Player>(0).Name = name;
                     SceneManager.LoadScene<MainMenuScene>();
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
                     continue;
                 }
                 break;

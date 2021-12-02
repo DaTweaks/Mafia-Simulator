@@ -43,6 +43,7 @@
         <Compile Include="Data\HighScore.cs" />
         <Compile Include="Data\Item.cs" />
         <Compile Include="Data\Player.cs" />
+        <Compile Include="Misc\TextManager.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="Data\DataHolder.cs" />

@@ -5,51 +5,51 @@ namespace MafiaSimulator.Data
 {
     public class HighScore : DataHolder
     {
-        public HighScore(string aFileName) : base(aFileName) { } 
+        public HighScore(string fileName) : base(fileName) { } 
         
-        public string myName;
+        public string Name;
 
-        public int myScore;
+        public int Score;
 
-        public string myDate;
+        public string Date;
         
         public override void Write()
         {
-            var tempArray = File.ReadAllLines(myFileName);
+            var lines = File.ReadAllLines(myFileName);
 
-            tempArray[0] = EditLine(tempArray[0], DataManager.FetchMyContent<Player>(0).MyName);
-            tempArray[1] = EditLine(tempArray[1], DataManager.FetchMyContent<Player>(0).MyScore.ToString());
-            tempArray[2] = EditLine(tempArray[2], DateTime.Today.ToString().Replace(" 00:00:00", ""));
+            lines[0] = EditLine(lines[0], DataManager.FetchMyContent<Player>(0).Name);
+            lines[1] = EditLine(lines[1], DataManager.FetchMyContent<Player>(0).Score.ToString());
+            lines[2] = EditLine(lines[2], DateTime.Today.ToString().Replace(" 00:00:00", ""));
 
-            File.WriteAllLines(myFileName, tempArray);
+            File.WriteAllLines(myFileName, lines);
         }
         
         private string EditLine(string aLine, string aReplaceVariable)
         {
-            var tempStringSplit = aLine.Split(':');
+            var stringSplit = aLine.Split(':');
 
-            tempStringSplit[0] += ":";
+            stringSplit[0] += ":";
 
-            var tempAfterKeySplit = tempStringSplit[1].Split('#');
+            var tempAfterKeySplit = stringSplit[1].Split('#');
 
             tempAfterKeySplit[0] = tempAfterKeySplit[0].Replace(tempAfterKeySplit[0].Trim(), aReplaceVariable);
             tempAfterKeySplit[1] = "#" + tempAfterKeySplit[1];
 
-            string tempJoin = "";
+            var join = "";
             
             for (int i = 0; i < tempAfterKeySplit.Length; i++)
-                tempJoin += tempAfterKeySplit[i];
+                join += tempAfterKeySplit[i];
 
-            return tempStringSplit[0] + tempJoin;
+            return stringSplit[0] + join;
         }
         
         public override void Load()
         {
-            var tempVariables = GetVariables();
+            var variables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            myScore = ConvertToIntParameter(tempVariables["score"], "score");
-            myDate = IsCorrectCheck(tempVariables["time"], "time");
+            Name = IsCorrectCheck(variables["name"],"name");
+            Score = ConvertToIntParameter(variables["score"], "score");
+            Date = IsCorrectCheck(variables["time"], "time");
         }
     }
 }

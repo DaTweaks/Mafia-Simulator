@@ -14,79 +14,79 @@ namespace MafiaSimulator.Scenes
                 {
                     Console.Clear();
 
-                    var aPlayer = DataManager.FetchMyContent<Player>(0);
+                    var player = DataManager.FetchMyContent<Player>(0);
                     
-                    var tempBanks = DataManager.FetchMyContentList<Bank>();
+                    var banks = DataManager.FetchMyContentList<Bank>();
                     
                     var tempAvailableBanks = new List<Bank>();
                     
-                    for (var i = 0; i < tempBanks.Count; i++)
-                        if(tempBanks[i].GetUnlockPopularity <= aPlayer.MyPopularity)
-                            tempAvailableBanks.Add(tempBanks[i]);
+                    for (var i = 0; i < banks.Count; i++)
+                        if(banks[i].GetUnlockPopularity <= player.Popularity)
+                            tempAvailableBanks.Add(banks[i]);
                     
-                    Program.DisplayPlayerStats();
+                    TextManager.DisplayPlayerStats();
                     
                     
                     
-                    var aLastDigit = 0;
-                    for (var i = 0; i < tempAvailableBanks.Count; i++, aLastDigit++)
-                        Program.ConsoleWriteLine($"{i} : {tempAvailableBanks[i].GetName}");
+                    var lastDigit = 0;
+                    for (var i = 0; i < tempAvailableBanks.Count; i++, lastDigit++)
+                        TextManager.ConsoleWriteLine($"{i} : {tempAvailableBanks[i].GetName}");
                     
                     if(tempAvailableBanks.Count == 0)
-                        Program.ConsoleWriteLine($"it's so empty in here!");
+                        TextManager.ConsoleWriteLine($"it's so empty in here!");
                     
-                    Program.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
-                    Program.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
+                    TextManager.ConsoleWriteLine($"{lastDigit} : Go back to previous menu");
+                    TextManager.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
 
 
-                    var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
+                    var input = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
-                    if (tempInput == aLastDigit || aLastDigit == 0)
+                    if (input == lastDigit || lastDigit == 0)
                     {
-                        Program.ConsoleWriteContinue("Returning to last menu!");
+                        TextManager.ConsoleWriteContinue("Returning to last menu!");
                         return;
                     }
                     
-                    if (aLastDigit < tempInput || tempInput < 0)
+                    if (lastDigit < input || input < 0)
                         throw new Exception("This isn't a valid number!");
                     
-                    if (aPlayer.MyCrew.Count == 0)
+                    if (player.Crew.Count == 0)
                         throw new Exception("You Can't Rob this bank as you don't have any crew members!");
+
+                    if (!DisplayBankInfo(tempAvailableBanks[input], player)) continue;
                     
-                    if (DisplayBankInfo(tempAvailableBanks[tempInput], aPlayer))
-                    {
-                        tempAvailableBanks[tempInput].Heist(aPlayer);
-                        for (var i = 0; i < tempBanks.Count; i++)
-                            if (tempBanks[i] == tempAvailableBanks[tempInput])
-                                DataManager.MyContent[typeof(Bank)].RemoveAt(i);
-                    }
+                    tempAvailableBanks[input].Heist(player);
+                    for (var i = 0; i < banks.Count; i++)
+                        if (banks[i] == tempAvailableBanks[input])
+                            DataManager.MyContent[typeof(Bank)].RemoveAt(i);
+                    
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 } 
             }
         }
 
-        private bool DisplayBankInfo(Bank aBank, Player aPlayer)
+        private bool DisplayBankInfo(Bank bank, Player player)
         {
             while (true)
             {
                 try
                 {
                     Console.Clear();
-                    Program.DisplayPlayerStats();
-                    aBank.ShowStats();
-                    Program.ConsoleWriteLine($"1 : Rob This Bank");
-                    Program.ConsoleWriteLine($"2 : Go back to previous menu");
+                    TextManager.DisplayPlayerStats();
+                    bank.ShowStats();
+                    TextManager.ConsoleWriteLine($"1 : Rob This Bank");
+                    TextManager.ConsoleWriteLine($"2 : Go back to previous menu");
                     
                     switch (int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            Program.ConsoleWriteContinue("Robbing the bank!");
+                            TextManager.ConsoleWriteContinue("Robbing the bank!");
                             return true;
                         case 2:
-                            Program.ConsoleWriteContinue("You go to the previous menu!");
+                            TextManager.ConsoleWriteContinue("You go to the previous menu!");
                             return false;
                         default:
                             throw new Exception("This isn't a valid number!");
@@ -94,7 +94,7 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 } 
             }
         }

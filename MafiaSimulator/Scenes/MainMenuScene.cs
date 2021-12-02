@@ -1,4 +1,5 @@
 ﻿using System;
+using MafiaSimulator.Data;
 
 // i do as rider commands.
 
@@ -13,38 +14,38 @@ namespace MafiaSimulator.Scenes
                 try
                 {
                     Console.Clear();
-                    Program.DisplayPlayerStats(ConsoleColor.Blue);
-                    Program.ConsoleWriteLine(@"
+                    TextManager.DisplayPlayerStats(ConsoleColor.Blue);
+                    TextManager.ConsoleWriteLine(@"
 1 : Heist a Bank!
 2 : Check your Warehouse!
 3 : Find New Crew Members!
 4 : Check out your crew!
 5 : Go to the black market!
 6 : Kill yourself!", ConsoleColor.Cyan, true);
-                    switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
+                    switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!")) // TODO : Replace with a better solution.
                     {
                         case 1:
-                            Program.ConsoleWriteContinue("Now Planning to Heist a Bank!");
+                            TextManager.ConsoleWriteContinue("Now Planning to Heist a Bank!");
                             SceneManager.LoadScene<BankScene>();
                             break;
                         case 2:
-                            Program.ConsoleWriteContinue("Going to your warehouse!");
+                            TextManager.ConsoleWriteContinue("Going to your warehouse!");
                             SceneManager.LoadScene<WareHouseScene>();
                             break;
                         case 3:
-                            Program.ConsoleWriteContinue("Finding new crew members!");
+                            TextManager.ConsoleWriteContinue("Finding new crew members!");
                             SceneManager.LoadScene<RecruitmentScene>();
                             break;
                         case 4:
-                            Program.ConsoleWriteContinue("Calling your Crew members!");
+                            TextManager.ConsoleWriteContinue("Calling your Crew members!");
                             SceneManager.LoadScene<CrewMenuScene>();
                             break;
                         case 5:
-                            Program.ConsoleWriteContinue("Going to the black market!");
+                            TextManager.ConsoleWriteContinue("Going to the black market!");
                             SceneManager.LoadScene<BlackmarketScene>();
                             break;
                         case 6:
-                            Program.ConsoleWriteContinue("You decided it's your time to go!");
+                            TextManager.ConsoleWriteContinue("You decided it's your time to go!");
                             SceneManager.LoadScene<EndingScene>();
                             break;
                         default:
@@ -53,7 +54,7 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
                 }
             }
         }

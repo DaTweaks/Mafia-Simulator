@@ -12,7 +12,7 @@ namespace MafiaSimulator.Scenes
                 try
                 {
                     Console.Clear();
-                    Program.ConsoleWriteLine(@"=======================================================================================================================================
+                    TextManager.ConsoleWriteLine(@"=======================================================================================================================================
  /$$      /$$            /$$$$$$  /$$                  /$$$$$$  /$$                         /$$             /$$                        
 | $$$    /$$$           /$$__  $$|__/                 /$$__  $$|__/                        | $$            | $$                        
 | $$$$  /$$$$  /$$$$$$ | $$  \__/ /$$  /$$$$$$       | $$  \__/ /$$ /$$$$$$/$$$$  /$$   /$$| $$  /$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$ 
@@ -21,23 +21,23 @@ namespace MafiaSimulator.Scenes
 | $$ \/  | $$|  $$$$$$$| $$      | $$|  $$$$$$$      |  $$$$$$/| $$| $$ | $$ | $$|  $$$$$$/| $$|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
 |__/     |__/ \_______/|__/      |__/ \_______/       \______/ |__/|__/ |__/ |__/ \______/ |__/ \_______/   \___/   \______/ |__/      
 =======================================================================================================================================");
-                    var tempHighscore = DataManager.FetchMyContent<HighScore>(0);
-                    Program.ConsoleWriteLine($@"
+                    var highscore = DataManager.FetchMyContent<HighScore>(0);
+                    TextManager.ConsoleWriteLine($@"
 Current HighScore
-   Score: {tempHighscore.myScore}
-    Name: {tempHighscore.myName}
-    Date: {tempHighscore.myDate}");
-                    Program.ConsoleWriteLine(@"
+   Score: {highscore.Score}
+    Name: {highscore.Name}
+    Date: {highscore.Date}");
+                    TextManager.ConsoleWriteLine(@"
 1 : Start the game!
 2 : Exit The game!", ConsoleColor.Cyan, true);
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            Program.ConsoleWriteContinue("Starting the game!");
+                            TextManager.ConsoleWriteContinue("Starting the game!");
                             SceneManager.LoadScene<SetupScene>();
                             break;
                         case 2:
-                            Program.ConsoleWriteLine("Now Exiting!", ConsoleColor.Red, true);
+                            TextManager.ConsoleWriteLine("Now Exiting!", ConsoleColor.Red, true);
                             Environment.Exit(0);
                             break;
                         default:
@@ -46,7 +46,7 @@ Current HighScore
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red, ConsoleColor.Red);
                 }
             }
         }

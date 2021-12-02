@@ -5,29 +5,29 @@ namespace MafiaSimulator.Data
 {
     public class Player : DataHolder
     {
-        public string MyName;
+        public string Name;
         
-        public int MyScore;
+        public int Score;
 
-        public int MyMoney;
+        public int Money;
 
-        public int MyPopularity;
+        public int Popularity;
 
-        public Tuple<int,int> MyDiscovered;
+        public Tuple<int,int> Discovered;
 
-        public List<Crew> MyCrew = new List<Crew>();
+        public List<Crew> Crew = new List<Crew>();
 
-        public List<Item> MyItems = new List<Item>();
+        public List<Item> Items = new List<Item>();
         
-        public Player(string aFileName) : base(aFileName) { }
+        public Player(string fileName) : base(fileName) { }
 
         public override void Load()
         {
-            var tempVariables = GetVariables();
+            var variables = GetVariables();
             
-            MyDiscovered = new Tuple<int, int>(0,ConvertToIntParameter(tempVariables["maxdiscovered"], "maxdiscovered"));
-            MyMoney = ConvertToIntParameter(tempVariables["money"], "money");
-            MyPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            Discovered = new Tuple<int, int>(0,ConvertToIntParameter(variables["maxdiscovered"], "maxdiscovered"));
+            Money = ConvertToIntParameter(variables["money"], "money");
+            Popularity = ConvertToIntParameter(variables["popularity"], "popularity");
         }
     }
 }

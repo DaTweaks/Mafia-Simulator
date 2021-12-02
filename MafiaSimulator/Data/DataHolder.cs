@@ -8,57 +8,57 @@ namespace MafiaSimulator.Data
     {
         protected string myFileName;
         
-        protected DataHolder(string aFileName) => myFileName = aFileName;
+        protected DataHolder(string fileName) => myFileName = fileName;
 
         public virtual void Write() {}
 
         protected Dictionary<string, string> GetVariables()
         {
-            var tempLines = File.ReadAllLines(myFileName);
-            Dictionary<string, string> tempVariables = new Dictionary<string, string>();
+            var lines = File.ReadAllLines(myFileName);
+            var variables = new Dictionary<string, string>();
             
-            for (int i = 0; i < tempLines.Length; i++)
+            for (var i = 0; i < lines.Length; i++)
             {
-                if (tempLines[i].StartsWith("#") || !tempLines[i].Contains(":"))
+                if (lines[i].StartsWith("#") || !lines[i].Contains(":"))
                     continue;
                 
-                var tempStringSplit = tempLines[i].Split(':');
-                var tempKey = tempStringSplit[0];
+                var stringSplit = lines[i].Split(':');
+                var key = stringSplit[0];
 
-                var tempValue = "";
+                var value = "";
                 
-                for (int j = 1; j < tempStringSplit.Length; j++)
-                    tempValue += tempStringSplit[j];
+                for (int j = 1; j < stringSplit.Length; j++)
+                    value += stringSplit[j];
 
-                var tempIndex = tempValue.IndexOf('#');
+                var tempIndex = value.IndexOf('#');
 
                 if (tempIndex != -1)
-                    tempValue = tempValue.Substring(0,tempIndex);
+                    value = value.Substring(0,tempIndex);
                 
-                tempVariables.Add(tempKey.Trim().ToLower(),tempValue.Trim());
+                variables.Add(key.Trim().ToLower(),value.Trim());
             }
 
-            return tempVariables;
+            return variables;
         }
         
-        protected int ConvertToIntParameter(string aVariable, string aKey)
+        protected int ConvertToIntParameter(string variable, string key)
         {
-            if (!int.TryParse(aVariable, out var tempConverted))
-                ConvertFailed(aKey, myFileName);
+            if (!int.TryParse(variable, out var tempConverted))
+                ConvertFailed(key, myFileName);
             return tempConverted;
         }
 
-        protected string IsCorrectCheck(string aVariable, string aKey)
+        protected string IsCorrectCheck(string variable, string key)
         {
-            if (string.IsNullOrEmpty(aVariable))
-                ConvertFailed(aKey, myFileName);
-            return aVariable;
+            if (string.IsNullOrEmpty(variable))
+                ConvertFailed(key, myFileName);
+            return variable;
         }
         
-        protected void ConvertFailed(string aKey, string aFileName)
+        private void ConvertFailed(string key, string fileName)
         {
-            Console.WriteLine($"Converting Failed! at the file: {aFileName} at the key: {aKey}");
-            Program.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red);
+            Console.WriteLine($"Converting Failed! at the file: {fileName} at the key: {key}");
+            TextManager.ConsoleWriteLine("Press any key to Continue!", ConsoleColor.Red);
             Environment.Exit(0); 
         }
 

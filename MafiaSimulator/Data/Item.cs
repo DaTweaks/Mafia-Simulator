@@ -4,48 +4,48 @@ namespace MafiaSimulator.Data
 {
     public class Item : DataHolder
     {
-        private string myName; 
-        public string GetName => myName;
+        private string _name; 
+        public string GetName => _name;
 
-        private int myType;
-        public int GetType => myType;
+        private int _type;
+        public int GetType => _type;
 
-        private int myLevel;
-        public int GetLevel => myLevel;
+        private int _level;
+        public int GetLevel => _level;
         
-        private int myUnlockPopularity;
-        public int GetUnlockPopularity => myUnlockPopularity;
+        private int _unlockPopularity;
+        public int GetUnlockPopularity => _unlockPopularity;
         
-        private int myCost;
-        public int GetCost => myCost;
+        private int _cost;
+        public int GetCost => _cost;
         
-        private int mySellCost;
-        public int GetSellCost => mySellCost;
+        private int _sellCost;
+        public int GetSellCost => _sellCost;
 
-        public Item(string aFileName) : base(aFileName) { } 
+        public Item(string fileName) : base(fileName) { } 
         
-        public void ShowStats(bool tempShowSellCost = false, bool tempShowCost = true)
+        public void ShowStats(bool showSellCost = false, bool showCost = true)
         {
-            Program.ConsoleWriteLine($"==================================");
-            Program.ConsoleWriteLine($"Name     : {myName}");
-            Program.ConsoleWriteLine($"{(myType == 0 ? "Offense" : "Defense")}  : {myLevel}");
-            if(tempShowCost)
-                Program.ConsoleWriteLine($"Cost     : {myCost}");
-            if (tempShowSellCost)
-                Program.ConsoleWriteLine($"Sellcost : {myCost}");
-            Program.ConsoleWriteLine($"==================================");
+            TextManager.ConsoleWriteLine($"==================================");
+            TextManager.ConsoleWriteLine($"Name     : {_name}");
+            TextManager.ConsoleWriteLine($"{(_type == 0 ? "Offense" : "Defense")}  : {_level}");
+            if(showCost)
+                TextManager.ConsoleWriteLine($"Cost     : {_cost}");
+            if (showSellCost)
+                TextManager.ConsoleWriteLine($"Sellcost : {_cost}");
+            TextManager.ConsoleWriteLine($"==================================");
         }
         
         public override void Load()
         {
-            var tempVariables = GetVariables();
+            var variables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            myType = ConvertToIntParameter(tempVariables["type"], "type");
-            myLevel = ConvertToIntParameter(tempVariables["level"], "level");
-            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
-            myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
-            mySellCost = ConvertToIntParameter(tempVariables["sellcost"], "sellcost");
+            _name = IsCorrectCheck(variables["name"],"name");
+            _type = ConvertToIntParameter(variables["type"], "type");
+            _level = ConvertToIntParameter(variables["level"], "level");
+            _unlockPopularity = ConvertToIntParameter(variables["popularity"], "popularity");
+            _cost = ConvertToIntParameter(variables["cost"], "cost");
+            _sellCost = ConvertToIntParameter(variables["sellcost"], "sellcost");
         }
     }
 }

@@ -13,80 +13,80 @@ namespace MafiaSimulator.Scenes
                 Console.Clear();
                 try
                 {
-                    var tempPlayer = DataManager.FetchMyContent<Player>(0);
-                    var tempCrew = DataManager.FetchMyContentList<Crew>();
+                    var player = DataManager.FetchMyContent<Player>(0);
+                    var crew = DataManager.FetchMyContentList<Crew>();
                     
-                    var tempAvailableCrews = new List<Crew>();
+                    var availableCrews = new List<Crew>();
                     
-                    for (var i = 0; i < tempCrew.Count; i++)
-                        if(tempCrew[i].GetUnlockPopularity <= tempPlayer.MyPopularity)
-                            tempAvailableCrews.Add(tempCrew[i]);
+                    for (var i = 0; i < crew.Count; i++)
+                        if(crew[i].GetUnlockPopularity <= player.Popularity)
+                            availableCrews.Add(crew[i]);
                     
-                    Program.DisplayPlayerStats();
-                    var aLastDigit = 0;
-                    for (var i = 0; i < tempAvailableCrews.Count; i++, aLastDigit++)
-                        Program.ConsoleWriteLine($"{i} : {tempAvailableCrews[i].GetName}      Cost: {tempAvailableCrews[i].GetCost}");
+                    TextManager.DisplayPlayerStats();
+                    var lastDigit = 0;
+                    for (var i = 0; i < availableCrews.Count; i++, lastDigit++)
+                        TextManager.ConsoleWriteLine($"{i} : {availableCrews[i].GetName}      Cost: {availableCrews[i].GetCost}");
                     
-                    if(tempAvailableCrews.Count == 0)
-                        Program.ConsoleWriteLine($"it's so empty in here!");
+                    if(availableCrews.Count == 0)
+                        TextManager.ConsoleWriteLine($"it's so empty in here!");
                     
-                    Program.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
-                    Program.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
+                    TextManager.ConsoleWriteLine($"{lastDigit} : Go back to previous menu");
+                    TextManager.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
                     
-                    var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
+                    var input = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
-                    if (tempInput == aLastDigit || aLastDigit == 0)
+                    if (input == lastDigit || lastDigit == 0)
                     {
-                        Program.ConsoleWriteContinue("Returning to last menu!");
+                        TextManager.ConsoleWriteContinue("Returning to last menu!");
                         return;
                     }
                     
-                    if (aLastDigit < tempInput || tempInput < 0)
+                    if (lastDigit < input || input < 0)
                         throw new Exception("This isn't a valid number!");
                     
-                    if (DisplayCrewInfo(tempAvailableCrews[tempInput], tempPlayer))
+                    if (DisplayCrewInfo(availableCrews[input], player))
                     {
-                        tempPlayer.MyMoney -= tempAvailableCrews[tempInput].GetCost;
-                        tempPlayer.MyCrew.Add(tempAvailableCrews[tempInput]);
+                        player.Money -= availableCrews[input].GetCost;
+                        player.Crew.Add(availableCrews[input]);
 
-                        for (var i = 0; i < tempCrew.Count; i++)
-                            if (tempCrew[i] == tempAvailableCrews[tempInput])
+                        for (var i = 0; i < crew.Count; i++)
+                            if (crew[i] == availableCrews[input])
                                 DataManager.MyContent[typeof(Crew)].RemoveAt(i);
                     }
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 }
             }
         }
 
-        private bool DisplayCrewInfo(Crew aCrew, Player aPlayer)
+        private bool DisplayCrewInfo(Crew crew, Player player)
         {
             while (true)
             {
                 try
                 {
                     Console.Clear();
-                    Program.DisplayPlayerStats();
-                    aCrew.ShowStats(true);
-                    Program.ConsoleWriteLine($"1 : Recruit him");
-                    Program.ConsoleWriteLine($"2 : Go back to previous menu");
+                    TextManager.DisplayPlayerStats();
+                    crew.ShowStats(true);
+                    TextManager.ConsoleWriteLine($"1 : Recruit him");
+                    TextManager.ConsoleWriteLine($"2 : Go back to previous menu");
                     
 
                     switch (int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            var tempResult = aPlayer.MyMoney >= aCrew.GetCost;
+                            var input = player.Money >= crew.GetCost;
 
-                            if (tempResult)
-                                Program.ConsoleWriteContinue("You have recruited him!");
+                            if (input)
+                                TextManager.ConsoleWriteContinue("You have recruited him!");
                             else
-                                Program.ConsoleWriteContinue("You don't have enough money!", ConsoleColor.Red, ConsoleColor.Red);
+                                TextManager.ConsoleWriteContinue("You don't have enough money!", ConsoleColor.Red, ConsoleColor.Red);
 
-                            return tempResult;
+                            return input;
                         case 2:
-                            Program.ConsoleWriteContinue("You go to the previous menu!");
+                            TextManager.ConsoleWriteContinue("You go to the previous menu!");
                             return false;
                         default:
                             throw new Exception("This isn't a valid number!");
@@ -94,7 +94,7 @@ namespace MafiaSimulator.Scenes
                 }
                 catch (Exception e)
                 {
-                    Program.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
+                    TextManager.ConsoleWriteContinue(e.Message, ConsoleColor.Red,ConsoleColor.Red);
                 } 
             }
         }

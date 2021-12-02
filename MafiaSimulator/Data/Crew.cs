@@ -4,69 +4,69 @@ namespace MafiaSimulator.Data
 {
     public class Crew : DataHolder
     {
-        private string myName;
-        public string GetName => myName;
+        private string _name;
+        public string GetName => _name;
 
-        private int myCost;
-        public int GetCost => myCost;
+        private int _cost;
+        public int GetCost => _cost;
 
-        private int myLoyalty;
-        public int GetLoyalty => myLoyalty;
+        private int _loyalty;
+        public int GetLoyalty => _loyalty;
 
-        private int myOffense;
-        public int GetOffense => myOffense;
+        private int _offense;
+        public int GetOffense => _offense;
 
-        private int myDefense;
-        public int GetDefense => myDefense;
+        private int _defense;
+        public int GetDefense => _defense;
         
-        private int mySkill;
-        public int GetSkill => mySkill;
+        private int _skill;
+        public int GetSkill => _skill;
         
-        private int myCovert;
-        public int GetCovert => myCovert;
+        private int _covert;
+        public int GetCovert => _covert;
         
-        private int myUnlockPopularity;
-        public int GetUnlockPopularity => myUnlockPopularity;
+        private int _unlockPopularity;
+        public int GetUnlockPopularity => _unlockPopularity;
         
-        private Item myWeapon;
-        public Item AccessWeapon { get => myWeapon; set => myWeapon = value; }
+        private Item _weapon;
+        public Item AccessWeapon { get => _weapon; set => _weapon = value; }
         
-        private Item myArmour;
-        public Item AccessArmour { get => myArmour; set => myArmour = value; }
+        private Item _armour;
+        public Item AccessArmour { get => _armour; set => _armour = value; }
         
 
-        public Crew(string aFileName) : base(aFileName) { }
+        public Crew(string fileName) : base(fileName) { }
 
-        public void ShowStats(bool tempShowItems = false, bool tempShowCost = true)
+        public void ShowStats(bool showItems = false, bool showCost = true)
         {
-            Program.ConsoleWriteLine($"==================================");
-            Program.ConsoleWriteLine($"Name     : {myName}");
-            Program.ConsoleWriteLine($"Offense  : {myOffense}");
-            Program.ConsoleWriteLine($"Defense  : {myDefense}");
-            Program.ConsoleWriteLine($"Covert   : {myCovert}");
-            Program.ConsoleWriteLine($"Skill    : {mySkill}");
-            if (tempShowItems)
+            TextManager.ConsoleWriteLine($"==================================");
+            TextManager.ConsoleWriteLine($"Name     : {_name}");
+            TextManager.ConsoleWriteLine($"Offense  : {_offense}");
+            TextManager.ConsoleWriteLine($"Defense  : {_defense}");
+            TextManager.ConsoleWriteLine($"Covert   : {_covert}");
+            TextManager.ConsoleWriteLine($"Skill    : {_skill}");
+            if (showItems)
             {
-                Program.ConsoleWriteLine($"Weapon   : {(myWeapon == null ? "Empty" : myWeapon.GetName)}");
-                Program.ConsoleWriteLine($"Armour   : {(myArmour == null ? "Empty" : myArmour.GetName)}");
+                TextManager.ConsoleWriteLine($"Weapon   : {(_weapon == null ? "Empty" : _weapon.GetName)}");
+                TextManager.ConsoleWriteLine($"Armour   : {(_armour == null ? "Empty" : _armour.GetName)}");
             }
-            if(tempShowCost)
-                Program.ConsoleWriteLine($"Cost     : {myCost}");
-            Program.ConsoleWriteLine($"==================================");
+            if(showCost)
+                TextManager.ConsoleWriteLine($"Cost     : {_cost}");
+            TextManager.ConsoleWriteLine($"==================================");
         }
         
         public override void Load()
         {
-            var tempVariables = GetVariables();
+            var variables = GetVariables();
             
-            myName = IsCorrectCheck(tempVariables["name"],"name");
-            myCost = ConvertToIntParameter(tempVariables["cost"], "cost");
-            myLoyalty = ConvertToIntParameter(tempVariables["loyalty"], "loyalty");
-            myOffense = ConvertToIntParameter(tempVariables["offense"], "offense");
-            myDefense = ConvertToIntParameter(tempVariables["defense"], "defense");
-            mySkill = ConvertToIntParameter(tempVariables["skill"], "skill");
-            myCovert = ConvertToIntParameter(tempVariables["covert"], "covert");
-            myUnlockPopularity = ConvertToIntParameter(tempVariables["popularity"], "popularity");
+            _name = IsCorrectCheck(variables["name"],"name");
+            _cost = ConvertToIntParameter(variables["cost"], "cost");
+            _loyalty = ConvertToIntParameter(variables["loyalty"], "loyalty");
+            _offense = ConvertToIntParameter(variables["offense"], "offense");
+            _defense = ConvertToIntParameter(variables["defense"], "defense");
+            _skill = ConvertToIntParameter(variables["skill"], "skill");
+            _covert = ConvertToIntParameter(variables["covert"], "covert");
+            _unlockPopularity = ConvertToIntParameter(variables["popularity"], "popularity");
         }
     }
 }
