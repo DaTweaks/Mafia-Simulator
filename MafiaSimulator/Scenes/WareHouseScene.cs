@@ -14,32 +14,32 @@ namespace MafiaSimulator.Scenes
                 {
                     Console.Clear();
                     
-                    var aPlayer = DataManager.FetchMyContent<Player>(0);
+                    var player = DataManager.FetchMyContent<Player>(0);
 
-                    var tempItems = aPlayer.Items;
+                    var items = player.Items;
 
                     TextManager.DisplayPlayerStats();
-                    var aLastDigit = 0;
-                    for (var i = 0; i < tempItems.Count; i++, aLastDigit++)
-                        TextManager.ConsoleWriteLine($"{i} : {tempItems[i].GetName}      {(tempItems[i].GetType == 0 ? "Offense": "Defense")} : {tempItems[i].GetLevel}     SellCost : {tempItems[i].GetSellCost}");
-                    if(tempItems.Count == 0)
+                    var lastDigit = 0;
+                    for (var i = 0; i < items.Count; i++, lastDigit++)
+                        TextManager.ConsoleWriteLine($"{i} : {items[i].GetName}      {(items[i].GetType == 0 ? "Offense": "Defense")} : {items[i].GetLevel}     SellCost : {items[i].GetSellCost}");
+                    if(items.Count == 0)
                         TextManager.ConsoleWriteLine($"it's so empty in here!");
                     
-                    TextManager.ConsoleWriteLine($"{aLastDigit} : Go back to previous menu");
+                    TextManager.ConsoleWriteLine($"{lastDigit} : Go back to previous menu");
                     TextManager.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
                     
                     var tempInput = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
 
-                    if (tempInput == aLastDigit || aLastDigit == 0)
+                    if (tempInput == lastDigit || lastDigit == 0)
                     {
                         TextManager.ConsoleWriteContinue("Returning to last menu!");
                         return;
                     }
                     
-                    if (aLastDigit < tempInput || tempInput < 0)
+                    if (lastDigit < tempInput || tempInput < 0)
                         throw new Exception("This isn't a valid number!");
                     
-                    DisplayItemInfo(tempItems[tempInput], aPlayer);
+                    DisplayItemInfo(items[tempInput], player);
                 }
                 catch (Exception e)
                 {
@@ -48,7 +48,7 @@ namespace MafiaSimulator.Scenes
             }
         }
 
-        private void DisplayItemInfo(Item aItem, Player aPlayer)
+        private void DisplayItemInfo(Item item, Player player)
         {
             while (true)
             {
@@ -56,17 +56,17 @@ namespace MafiaSimulator.Scenes
                 {
                     Console.Clear();
                     TextManager.DisplayPlayerStats();
-                    aItem.ShowStats(true, false);
+                    item.ShowStats(true, false);
                     TextManager.ConsoleWriteLine($"1 : Sell the item");
                     TextManager.ConsoleWriteLine($"2 : Go back to previous menu");
                     
                     switch (int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
-                            var tempItems = aPlayer.Items;
-                            aPlayer.Money += aItem.GetSellCost;
+                            var tempItems = player.Items;
+                            player.Money += item.GetSellCost;
                             for (var i = 0; i < tempItems.Count; i++)
-                                if(tempItems[i] == aItem)
+                                if(tempItems[i] == item)
                                     tempItems.RemoveAt(i);
                             return;
                         case 2:
