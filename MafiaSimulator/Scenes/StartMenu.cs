@@ -21,15 +21,17 @@ namespace MafiaSimulator.Scenes
 | $$ \/  | $$|  $$$$$$$| $$      | $$|  $$$$$$$      |  $$$$$$/| $$| $$ | $$ | $$|  $$$$$$/| $$|  $$$$$$$  |  $$$$/|  $$$$$$/| $$      
 |__/     |__/ \_______/|__/      |__/ \_______/       \______/ |__/|__/ |__/ |__/ \______/ |__/ \_______/   \___/   \______/ |__/      
 =======================================================================================================================================");
-                    var highscore = DataManager.FetchMyContent<HighScore>(0);
+                    var highscore = DataManager.currentHighscore;
+                    highscore.UpdateData();
                     TextManager.ConsoleWriteLine($@"
 Current HighScore
-   Score: {highscore.Score}
-    Name: {highscore.Name}
-    Date: {highscore.Date}");
+    Name: {highscore.Variables[0].Name}
+   Score: {highscore.Variables[0].Score}
+    Date: {highscore.Variables[0].Date}");
                     TextManager.ConsoleWriteLine(@"
 1 : Start the game!
-2 : Exit The game!", ConsoleColor.Cyan, true);
+2 : See the Leaderboard!
+3 : Exit The game!", ConsoleColor.Cyan, true);
                     switch (int.TryParse(Console.ReadLine(), out var tempInput) ? tempInput : throw new Exception("This isn't a Number!"))
                     {
                         case 1:
@@ -37,6 +39,18 @@ Current HighScore
                             SceneManager.LoadScene<SetupScene>();
                             break;
                         case 2:
+                            Console.Clear();
+                            highscore.UpdateData(5);
+                            for (int i = 0; i < DataManager.currentHighscore.Variables.Count && i < 5; i++)
+                            {
+                                TextManager.ConsoleWriteLine($@"{i+1} -
+Name: {highscore.Variables[i].Name}
+Score: {highscore.Variables[i].Score}
+Date: {highscore.Variables[i].Date}");
+                            }
+                            TextManager.ConsoleWriteContinue();
+                            break;
+                        case 3:
                             TextManager.ConsoleWriteLine("Now Exiting!", ConsoleColor.Red, true);
                             Environment.Exit(0);
                             break;
