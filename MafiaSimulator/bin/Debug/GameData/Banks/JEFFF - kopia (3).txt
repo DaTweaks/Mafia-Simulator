@@ -1,0 +1,6 @@
+NAME: Amazing on 		# can't be empty
+MONEYGAINED: 10			# > 0, the amount of money gained by a completed heist
+SECURITY: 1 			# > 0, how secure the bank is
+GULLIBILITY: 1 			# > 0, how easily tricked the bank is
+POPULARITY: 1 			# > 0, the amount of popularity needed to unlock
+POPULARITYGAINED: 50		# > 0, the amount of popularity gained from heisting

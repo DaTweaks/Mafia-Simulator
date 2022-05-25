@@ -36,7 +36,7 @@ namespace MafiaSimulator.Scenes
                         TextManager.ConsoleWriteLine($"it's so empty in here!");
                     
                     TextManager.ConsoleWriteLine($"{lastDigit} : Go back to previous menu");
-                    TextManager.ConsoleWriteLine("Please enter your the Crew member you want to inspect");
+                    TextManager.ConsoleWriteLine("Please enter your the bank you want to Heist!");
 
 
                     var input = int.TryParse(Console.ReadLine(), out var temp) ? temp : throw new Exception("This isn't a Number!");
