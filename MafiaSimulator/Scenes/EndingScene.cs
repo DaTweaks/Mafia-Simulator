@@ -10,13 +10,7 @@ namespace MafiaSimulator.Scenes
             var highScore = DataManager.currentHighscore;
             highScore.UpdateData();
             var player = DataManager.FetchMyContent<Player>(0);
-            if (player.Score > highScore.Variables[0].Score)
-            {
-                highScore.Variables[0].Name = player.Name;
-                highScore.Variables[0].Score = player.Score;
-                highScore.Variables[0].Date = DateTime.Today.ToString().Replace(" 00:00:00", "");
-                highScore.UpdateTable();
-            }
+            highScore.UpdateTable(new HighScore.HighscoreVariables(player.Name, player.Score, DateTime.Today.ToString().Replace(" 00:00:00", "")));
             DataManager.FetchData();
             TextManager.ConsoleWriteContinue("You lost!",ConsoleColor.Red,ConsoleColor.Red);
             SceneManager.LoadScene<StartMenu>();

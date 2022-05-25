@@ -31,12 +31,12 @@ namespace MafiaSimulator.Data
             public string Date;
         }
 
-        public override void UpdateTable()
+        public void UpdateTable(HighscoreVariables highscoreVariables)
         {
             using (SqlConnection conn = new SqlConnection(_connectionString, _sqlCredential))
             {
                 conn.Open();
-                var selectCommand = new SqlCommand($"INSERT INTO {_assignedTable} ([Names], [Score], [Date]) VALUES ('{Variables[0].Name}', {Variables[0].Name}, {DateTime.Today})", conn);
+                var selectCommand = new SqlCommand($"INSERT INTO {_assignedTable} ([Names], [Score], [Date]) VALUES ('{highscoreVariables.Name}', {highscoreVariables.Score}, {highscoreVariables.Date})", conn);
                 selectCommand.ExecuteReader().Close();
                 conn.Close();
             }
