@@ -1,90 +1,55 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Security;
-using Microsoft.Identity.Client;
-using Microsoft.Data.SqlClient;
 
 namespace MafiaSimulator.Data
 {
-    public class HighScore : DataBaseHolder
+    public class HighScore : DataHolder
     {
-        public List<HighscoreVariables> Variables = new List<HighscoreVariables>();
+        public HighScore(string fileName) : base(fileName) { } 
         
-        private string _connectionString;
-        private SqlCredential _sqlCredential;
-        private string _assignedTable;
+        public string Name;
 
-        public class HighscoreVariables
+        public int Score;
+
+        public string Date;
+        
+        public override void Write()
         {
-            public HighscoreVariables(string name, int score, string date)
-            {
-                Name = name;
-                Score = score;
-                Date = date;
-            }
-            
-            public string Name;
+            var lines = File.ReadAllLines(myFileName);
 
-            public int Score;
+            lines[0] = EditLine(lines[0], DataManager.FetchMyContent<Player>(0).Name);
+            lines[1] = EditLine(lines[1], DataManager.FetchMyContent<Player>(0).Score.ToString());
+            lines[2] = EditLine(lines[2], DateTime.Today.ToString().Replace(" 00:00:00", ""));
 
-            public string Date;
+            File.WriteAllLines(myFileName, lines);
         }
-
-        public void UpdateTable(HighscoreVariables highscoreVariables)
+        
+        private string EditLine(string aLine, string aReplaceVariable)
         {
-            using (SqlConnection conn = new SqlConnection(_connectionString, _sqlCredential))
-            {
-                conn.Open();
-                var selectCommand = new SqlCommand($"INSERT INTO {_assignedTable} ([Names], [Score], [Date]) VALUES ('{highscoreVariables.Name}', {highscoreVariables.Score}, {highscoreVariables.Date})", conn);
-                selectCommand.ExecuteReader().Close();
-                conn.Close();
-            }
-        }
+            var stringSplit = aLine.Split(':');
 
-        public override void UpdateData(int topDisplayed = 1)
+            stringSplit[0] += ":";
+
+            var tempAfterKeySplit = stringSplit[1].Split('#');
+
+            tempAfterKeySplit[0] = tempAfterKeySplit[0].Replace(tempAfterKeySplit[0].Trim(), aReplaceVariable);
+            tempAfterKeySplit[1] = "#" + tempAfterKeySplit[1];
+
+            var join = "";
+            
+            for (int i = 0; i < tempAfterKeySplit.Length; i++)
+                join += tempAfterKeySplit[i];
+
+            return stringSplit[0] + join;
+        }
+        
+        public override void Load()
         {
-            if (topDisplayed < 1)
-                topDisplayed = 1;
-                
-            using (SqlConnection conn = new SqlConnection(_connectionString, _sqlCredential))
-            {
-                conn.Open();
-                Variables.Clear();
-                var selectCommand = new SqlCommand($"SELECT TOP {topDisplayed} * FROM {_assignedTable}  order by score desc;", conn); // WhY iS sCoRe HeRe?1!!??++!! calm down buddy. this is made specifically for something that golds score. if there is no score at all it will throw a hissyfit.
-                var results = selectCommand.ExecuteReader();
-                while (results.Read())
-                {
-                    Variables.Add(new HighscoreVariables(
-                        Convert.ToString(results[0]),
-                        Convert.ToInt32(results[1]),
-                        Convert.ToString(results[2]).Replace(" 00:00:00", "")
-                        )
-                    );
-                }
-                results.Close();
-                conn.Close();
-            }
-        }
-
-        public override void Load(string azureUserId, string azurePassword, string dataBase, string assignedTable)
-        { 
-            _connectionString = $"Server=tcp:{DataManager.azureServer},1433;"
-                                       + $"Database={dataBase};"
-                                       + "Encrypt=True;";
-
-            _assignedTable = assignedTable;
+            var variables = GetVariables();
             
-            var pwd = new SecureString();
-
-            var azurePasswordCharArray = azurePassword.ToCharArray();
-            
-            for (int i = 0; i < azurePasswordCharArray.Length; i++)
-                pwd.AppendChar(azurePasswordCharArray[i]);
-
-            pwd.MakeReadOnly();
-            
-            _sqlCredential = new SqlCredential(azureUserId, pwd);
+            Name = IsCorrectCheck(variables["name"],"name");
+            Score = ConvertToIntParameter(variables["score"], "score");
+            Date = IsCorrectCheck(variables["time"], "time");
         }
     }
 }

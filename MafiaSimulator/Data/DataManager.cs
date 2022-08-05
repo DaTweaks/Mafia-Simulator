@@ -6,13 +6,6 @@ namespace MafiaSimulator.Data
 {
     public static class DataManager
     {
-        public static string azureServer = "mafiasimultator.database.windows.net";
-
-        private static string _azureUsername = "MafiaSimAuditor";
-        private static string _azurePassword = "CantTouchMe!";
-
-        public static HighScore currentHighscore = new HighScore();
-
         public static Dictionary<Type, List<object>> MyContent = new Dictionary<Type, List<object>>();
         
         public static void FetchData()
@@ -21,7 +14,7 @@ namespace MafiaSimulator.Data
             FetchFolderData<Bank>("Banks");
             FetchFolderData<Item>("Items");
             FetchFolderData<Crew>("Crew");
-            currentHighscore.Load(_azureUsername, _azurePassword, "Highscores", "tblhighscores");
+            FetchFolderData<HighScore>("HighScore");
             FetchFolderData<Player>("PlayerStartingValues");
         }
 
